@@ -1,0 +1,360 @@
+Q) What is the difference between ArrayList and LinkedList?
+
+ArrayList					LinkedList
+----------					------------
+The underlying data structure is resizable 	The underlying data structure is doubly 
+array or growable array.			linkedlist.
+
+ArrayList is better for accessing and storing 	LinkedList is better for manipulating the data.
+the data.
+
+Memory location for the elements of a ArrayList	Memory location for the elements of a LinkedList
+is contigeous. 					is not contigeous.
+
+When ArrayList is initialized, a default 	There is no default capacity.
+capacity 10 will assign to ArrayList.
+
+Vector 
+======
+The underlying data structure is resizable array or growable array.
+
+Duplicate objects are allowed.
+
+Insertion order is preserved.
+
+Hetrogeneous objects are allowed.
+
+Null insertion is possible.
+
+All methods present in Vector are synchronized.
+
+Vector class contains following methods
+ex:
+	addElement()
+	removeElementAt()
+	removeAllElements()
+	firstElement()
+	lastElement()
+	and etc.
+
+ex:
+---
+
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		Vector<Integer> v=new Vector<Integer>();
+		System.out.println(v.capacity());
+		
+		for(int i=1;i<=10;i++)
+		{
+			v.addElement(i);
+		}
+		System.out.println(v); //[1,2,3,4,5,6,7,8,9,10]
+		
+		System.out.println(v.firstElement());//1
+		System.out.println(v.lastElement());//10
+		
+		v.removeElementAt(5);
+		System.out.println(v); ////[1,2,3,4,5,7,8,9,10]
+		
+		v.removeAllElements();
+		System.out.println(v); // []
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		Vector<Integer> v=new Vector<Integer>();
+		System.out.println(v.capacity());
+		
+		for(int i=1;i<=10;i++)
+		{
+			v.add(i);
+		}
+		System.out.println(v); //[1,2,3,4,5,6,7,8,9,10]
+		
+		System.out.println(v.get(0));//1
+		System.out.println(v.get(v.size()-1));//10
+		
+		v.remove(5);
+		System.out.println(v); ////[1,2,3,4,5,7,8,9,10]
+		
+		v.clear();
+		System.out.println(v); // []
+	}
+}
+
+Q) What is the difference between ArrayList and Vector?
+
+ArrayList					Vector
+----------					---------
+No method is synchronized.			All methods are synchronized.
+
+At a time multiple Threads are allow to 	At a time only one thread is allow to operate
+operate on ArrayList object and hence 		on Vector and Hence Vector object is Thread safe.
+ArrayList object is not Thread safe.   
+
+Relatively performance is high because 		Relative performance is low because Threads are Threads are not required to wait. 		required to wait.
+
+It is non legacy and introduced in 1.2v. 	It is a legacy and introduced in 1.0v.
+
+Stack
+=====
+It is a child class of Vector class.
+
+If we depend upon first in last out order then we need to use Stack.
+
+constructor
+----------
+	Stack s = new Stack();
+
+Methods
+--------
+
+1) push(E)
+-------
+	It is used to push the element in a stack.
+
+2) pop()
+------
+	It is used to pop the element from stack.
+
+3) peek()
+-------
+	It returns toppest element from stack.
+
+4) isEmpty()
+-------
+	It is used to check stack is empty or not.
+
+5) search(Object o)
+---------------
+	It returns offset value if element found otherwise it returns -1.
+	
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		Stack<String> s=new Stack<String>();
+		s.push("A");
+		s.push("B");
+		s.push("C");
+		System.out.println(s); //[A,B,C]
+		
+		s.pop();
+		System.out.println(s); //[A,B]
+		
+		System.out.println(s.peek());//B 
+		
+		System.out.println(s.isEmpty());//false
+		
+		System.out.println(s.search("Z"));//-1
+		
+		System.out.println(s.search("A"));//2
+	}
+}
+
+Q) Write a java program to check given string is balanced or not?
+
+Input:
+	{[()]}
+
+Output:
+	It is a balanced string 
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="{[()]}";
+		if(isBalanced(str))
+			System.out.println("It is a balanced string");
+		else
+			System.out.println("It is not a balanced string");
+	}
+	//callie method
+	public static boolean isBalanced(String str)
+	{
+		Stack<Character> s=new Stack<Character>();
+		
+		for(int i=0;i<str.length();i++)
+		{
+			char ch=str.charAt(i);
+			
+			if(ch=='{' || ch=='[' || ch=='(')
+			{
+				s.push(ch);
+			}
+			else if(ch==')' && !s.isEmpty() && s.peek()=='(')
+			{
+				s.pop();
+			}
+			else if(ch==']' && !s.isEmpty() && s.peek()=='[')
+			{
+				s.pop();
+			}
+			else if(ch=='}' && !s.isEmpty() && s.peek()=='{')
+			{
+				s.pop();
+			}
+			else
+			{
+				return false;
+			}
+		}
+		
+		return s.isEmpty();
+	}
+}
+
+
+Set
+====
+It is a child interface of Collection interface.
+
+If we want to represent group of individual objects where duplicate values are not allowed and order
+is not preserved then we need to use Set interface.
+
+Diagram:  java40.1
+
+HashSet
+=======
+The underlying data structure is Hashtable.
+
+Duplicate objects are not allowed.
+
+Insertion order is not preserved because it takes hashcode of an object.
+
+Hetrogeneous objects are allowed.
+
+Null insertion is possible.
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		HashSet hs=new HashSet();
+		hs.add("nine");
+		hs.add("one");
+		hs.add("six");
+		System.out.println(hs);//[nine, six, one]
+		
+		hs.add("one");
+		System.out.println(hs); //[nine, six, one]
+		
+		hs.add(10);
+		System.out.println(hs);//[nine, six, one, 10]
+		
+		hs.add(null);
+		System.out.println(hs);//[null, nine, six, one, 10]
+	}
+	
+}
+
+LinkedHashSet 
+=============
+LinkedHashSet is a child class of HashSet class.
+
+LinkedHashSet is similar to HashSet class with following differences.
+
+
+HashSet						LinkedHashSet
+------------					---------------
+The underlying data structure is Hashtable.	The underlying data structure is Hashtable and 
+						LinkedList.
+
+Insertion order is not preserved.		Insertion order is preserved.
+
+Introduced in 1.2v.				Introduced in 1.4v.
+
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		LinkedHashSet lhs=new LinkedHashSet();
+		lhs.add("nine");
+		lhs.add("one");
+		lhs.add("six");
+		System.out.println(lhs);//[nine, one, six]
+		
+		lhs.add("one");
+		System.out.println(lhs); //[nine, one, six]
+		
+		lhs.add(10);
+		System.out.println(lhs);//[nine, one, six, 10]
+		
+		lhs.add(null);
+		System.out.println(lhs);//[nine, one, six, 10, null]
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

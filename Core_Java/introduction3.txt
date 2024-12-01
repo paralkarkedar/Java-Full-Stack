@@ -1,0 +1,294 @@
+Escape Characters or Escape Sequences
+=====================================
+Escape characters are used to design our output in neat and clean manner.
+
+Escape characters starts with back slash (\) followed by a character.
+ex:
+	\n
+
+Mostly escape characters are placed inside the output statement.
+ex:
+	System.out.println("\n");
+
+We have following list of escape characters in java.
+
+1) \n (new line)
+
+2) \t (horizontal tab)
+
+3) \b (back space)
+
+4) \r (carriage return)
+
+5) \f (form feeding)
+
+6) \\ (double slash)
+
+7) \" (double quote)
+
+8) \' (single quote)
+
+and etc.
+
+
+1) \n (new line)
+----------------
+class Suman
+{
+	public static void main(String[] args)
+	{
+		System.out.println("IHUB\nTALENT");
+	}
+}
+
+o/p:
+	IHUB
+	TALENT
+
+
+2) \t (horizontal tab)
+-----------------------
+class Satish
+{
+	public static void main(String[] args)
+	{
+		System.out.println("IHUB\tTALENT");
+	}	
+}
+o/p:
+	IHUB	TALENT
+
+
+3) \b (back space)
+-------------------
+class Naveen
+{
+	public static void main(String[] args)
+	{
+		System.out.println("IHUBTAL\bENT");	
+	}
+}
+o/p:
+	IHUBTAENT
+
+ex:
+---
+class Prasad
+{
+	public static void main(String[] args)
+	{
+		System.out.println("IHUBTAL\b\b\bENT");
+	}
+}
+
+o/p:
+	IHUBENT
+
+4) \r (carriage return)
+-----------------------
+class Jaydeep
+{
+	public static void main(String[] args)
+	{
+		System.out.println("IHUB\rTALENT");		
+	}	
+}
+o/p:	
+	TALENT 
+
+ex:
+---
+class Nagaraju
+{
+	public static void main(String[] args)
+	{
+		System.out.println("TALENT\rIHUB");
+	}
+}
+o/p:
+	IHUBNT	
+
+
+6) \\ (double slash)
+--------------------
+class Pavan
+{
+	public static void main(String[] args)
+	{
+		System.out.println("IHUB\\TALENT");
+	}
+}
+
+
+o/p:
+	IHUB\TALENT
+
+
+7) \" (double quote)
+----------------------
+class Varshith
+{
+	public static void main(String[] args)
+	{
+		System.out.println("java is a \"best\" programming");
+	}
+}
+o/p:
+	java is a "best" programming
+
+
+
+
+
+
+
+8) \' (single quote)
+---------------------
+class Srikanth
+{
+	public static void main(String[] args)
+	{
+		System.out.println("Java is 'best' language");
+		System.out.println("Java is \'best\' language");
+	}
+}
+o/p:
+	Java is 'best' language
+	Java is 'best' language
+
+
+Interview Questions
+====================
+
+Q) Types of modules in Java?
+
+We have three modules in java.
+
+1) JSE/J2SE (Java Standard Edition)
+
+2) JEE/J2EE (Java Enterprise Edition)
+
+3) JME/J2ME (Java Micro Edition)
+
+
+Comments in Java
+=================
+Comments are created for documentation purpose.
+
+Comments are used to improve readability of our code.
+
+It is highly recommanded to use comments in regular programming.
+
+Comments will not display in output because they will ignored by the compiler.
+
+In java , comments are divided into two types.
+
+1) Single Line comment 
+----------------
+	It is used to comment a single line.
+	ex:
+		// comment here 
+
+
+2) Multiple line comment 
+------------------------
+	It is used to comment multiple lines.
+	ex:
+		/*
+			-
+			- comment here 
+			-
+		*/
+		
+
+
+//import statement
+import java.util.*;  
+
+//class declaration 
+class Test
+{  
+	//main method
+	public static void main(String args[])
+	{
+		//variable declaration   
+		int x=10;
+
+		//output stmt
+		System.out.println(x);
+	} 	 
+}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

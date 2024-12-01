@@ -1,0 +1,272 @@
+Abstraction
+===========
+Hiding internal implementation and highlighting the set of services is called abstraction.
+
+Using abstract classes and interfaces we can implements abstraction.
+
+The best example of abstraction is GUI ATM machine. Where bank people will hide internal implementation and highlights the set of services like banking, withdrawl,mini statement and etc.
+
+The main advantages of abstraction are 
+
+1) It gives security because it will hide internal implementation.
+
+2) Enhancement becomes more easy because without effecting enduser they can perform any changes 
+   in our internal system.
+
+3) It provides flexibility to the enduser to use the system.
+
+4) It improves maintainability of an application.
+
+Encapsulation
+==============
+The process of encapsulating or grouping variables and it's associate methods in a single entity is called encapsulation.
+
+Diagram: java27.1
+
+A class is said to be encapusulated class, if it supports data hiding and abstraction.
+
+Abstraction is used to hide the data and encapsulation is used to protect the data.
+
+In encapsulation for every variable we need to write setter and getter methods.
+
+Diagram: java27.2
+
+The main advantages of encapsulation are
+
+1) It gives security.
+
+2) Enhancement becomes more easy.
+
+3) It provide flexibility to the enduser to use the system.
+
+4) It improves maintainability of an application.
+
+The main disadvantage of encapsulation is , it will increase the length of our code and slowdown the execution process.
+
+
+ex:
+---
+class Student
+{
+	//current class variables 
+	private int studId;
+	private String studName;
+	private double studFee;
+	
+	//setter methods
+	public void setStudId(int studId)
+	{
+		this.studId=studId;
+	}
+	public void setStudName(String studName)
+	{
+		this.studName=studName;
+	}
+	public void setStudFee(double studFee)
+	{
+		this.studFee=studFee;
+	}
+	
+	//getter methods 
+	public int getStudId()
+	{
+		return studId;
+	}
+	public String getStudName()
+	{
+		return studName;
+	}
+	public double getStudFee()
+	{
+		return studFee;
+	}
+}
+class Test
+{
+	public static void main(String[] args)
+	{
+		Student s=new Student();
+		s.setStudId(101);
+		s.setStudName("Alan Morries");
+		s.setStudFee(1000d);
+		
+		System.out.println("Student Id : "+s.getStudId());
+		System.out.println("Student Name : "+s.getStudName());
+		System.out.println("Student Fee : "+s.getStudFee());
+
+	}
+}
+
+Q) What is the difference between Abstraction and Encapsulation?
+
+Abstraction						Encapsulation
+--------------						---------------
+Hiding internal implementation and 			The process of encapsulating or grouping
+highlighting the set of services is called 		variables and it's associate methods in a
+abstraction. 						single entity is called encapsulation. 
+
+It is used to hide the data. 				It is used to protect the data. 
+
+Using abstract classes and interfaces we 		Using access modifiers we can implements 
+can implements abstraction. 				encapsulation.
+
+It is a process of gaining the information. 		It is a process of containing the information.
+ 
+It solves an issue at design level. 			It solves an issue at implementation level. 
+
+
+
+Q) What is the difference between POJO class and Java Bean class?
+
+
+POJO						Java Bean 
+-------------					---------------
+It can’t be serialized. 			It can be serialized. 
+
+Fields can have any visibility. 		Fields can have only private visibility. 
+
+There may or may not have 0-arg constructor. 	It must have 0-argument constructor. 
+
+It does not extend any other class. 		It can extends. 
+
+It does not implement any other interface. 	It can implements. 
+
+It does not use any outside annotation. 	It uses outside annotation.
+
+Note:
+-------
+Every java bean class is a pojo class.
+
+But every pojo class is not a java bean class.
+
+
+
+Is-A relationship
+==================
+Is-a relationship is also known as inheritance.
+
+Using extends keyword we can implements Is-A relationship.
+
+The main objective of Is-A relationship is to provide reusability.
+
+ex:
+---\
+class Parent 
+{
+	public void m1()
+	{
+		System.out.println("M1-Method");
+	}
+}
+class Child extends Parent 
+{
+	public void m2()
+	{
+		System.out.println("M2-Method");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Parent p=new Parent();
+		p.m1();
+		
+		Child c=new Child();
+		c.m1();
+		c.m2();
+		
+		Parent p1=new Child();
+		p1.m1();
+		
+		//Child c1=new Parent(); // C.T.E  
+	}
+}
+
+conclusion
+---------
+Whatever our parent having properties it comes to child.
+But whatever child having properties it never goes back to parent.
+
+A parent reference can hold child object but child reference can't parent object.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,725 @@
+2) IF ELSE STMT
+===============
+It evaluates the code either our condition is true or false.
+
+syntax:
+-------
+	if(condition)
+	{
+		-
+		- //code to be execute if condition is true 
+		-
+	}
+	else
+	{
+		-
+		- //code to be execute if condition is false
+		-		
+	}
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			if(5>2)
+				document.writeln("Welcome");
+			else
+				document.writeln("Thankyou");
+
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			if(5,4,3,2,1,0)
+				document.writeln("Welcome");
+			else
+				document.writeln("Thankyou");
+
+		</script>
+</body>
+</html>
+
+Q) Write a javascript program to check given age is eligible to vote or not?
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var age=parseInt(prompt("Enter the age :"));
+
+			if(age>=18)
+				document.writeln("U r eligible to vote");
+			else
+				document.writeln("U r not eligible to vote");
+
+		</script>
+</body>
+</html>
+
+3) IF ELSE IF STMT 
+===================
+It evaluates the code based on multiple conditions.
+
+syntax:
+-------
+	if(cond1)
+	{
+		- //code to be execute if cond1 is true 
+	}
+	else if(cond2)
+	{
+		- //code to be execute if cond2 is true 	
+	}
+	else if(cond3)
+	{
+		- //code to be execute if cond3 is true 
+	}
+	else
+	{
+		- //code to be execute if all conditions are false	
+	}
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var opt=parseInt(prompt("Enter the option :"));
+
+			if(opt==100)
+				document.writeln("It is a police number");
+			else if(opt==103)
+				document.writeln("It is a enquiry number");
+			else if(opt==108)
+				document.writeln("It is a emergency number");
+			else
+				document.writeln("Invalid option");
+
+		</script>
+</body>
+</html>
+
+Q) Write a javascript program to find out greatest of three numbers?
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var a=10,b=15,c=11;
+
+			if((a>b) && (a>c))
+				document.writeln(a+" is greatest");
+			else if((b>a) && (b>c))
+				document.writeln(b+" is greatest");
+			else if((c>a) && (c>b))
+				document.writeln(c+" is greatest");
+
+		</script>
+</body>
+</html>
+
+JavaScript Switch Case 
+=======================
+It evaluates the code based on multiple conditions.
+
+It is more convenient then if else if statement because we can declare numbers, strings, characters and etc.
+
+syntax:
+------
+	switch(condition)
+	{
+		case value1:  //code to be execute
+			      break;
+		-
+		-
+		default:   //code to be execute if all cases are false
+	}
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var opt=parseInt(prompt("Enter the option :"));
+
+			switch(opt)
+			{
+				case 100:  document.writeln("Police number");
+						   break;
+				case 103:  document.writeln("Enquiry number");
+						   break;
+				case 108:  document.writeln("Emergency number");
+						   break;		
+				default:   document.writeln('Invalid option');
+			}
+
+		</script>
+</body>
+</html>
+
+Q) Write a javascript program to check given alphabet is a vowel or not?
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var ch=prompt("Enter the Alphabet :");
+
+			switch(ch)
+			{
+				case 'a':  document.writeln("It is a vowel"); break;
+				case 'e':  document.writeln("It is a vowel"); break;
+				case 'i':  document.writeln("It is a vowel"); break;
+				case 'o':  document.writeln("It is a vowel"); break;
+				case 'u':  document.writeln("It is a vowel"); break;
+				default:   document.writeln('It is not a vowel');
+			}
+
+		</script>
+</body>
+</html>
+
+JavaScript LOOPS
+================
+JavaScript loops are used to iterate the code repeatedly.
+
+We have four types of loops in javascript.
+
+1) do while loop 
+
+2) while loop 
+
+3) for loop 
+
+4) for in loop 
+
+1) do while loop 
+-----------------
+It evaluates the code how long our condition is true.
+
+syntax:
+	do
+	{
+		-
+		- //code to be execute
+		-
+	}while(condition);
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i=1;
+
+			do
+			{
+				document.writeln(i);//1 2 3 4 5 6 7 8 9 10 
+
+				i++;
+
+			}while(i<=10);
+
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i=11;
+
+			do
+			{
+				document.writeln(i);//11
+
+				i++;
+
+			}while(i<=10);
+
+		</script>
+</body>
+</html>
+
+2) while loop 
+---------------
+It evaluates the code how long our condition is true.
+
+syntax;
+-------
+	while(condition)
+	{
+		-
+		-
+		-
+	}
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i=1;
+
+			while(i<=10)
+			{
+					document.writeln(i);//1 2 3 4 5 6 7 8 9 10
+
+					i++;
+			}	
+
+		</script>
+</body>
+</html>
+
+ex:
+--
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i=11;
+
+			while(i<=10)
+			{
+					document.writeln(i); // no output 
+
+					i++;
+			}	
+
+		</script>
+</body>
+</html>
+
+3) for loop 
+------------
+It evaluates the code how long our condition is true.
+
+syntax:
+-----
+	for(initialization;condition;incrementation/decrementation)
+	{
+		-
+		- //code to be execute 
+		-	
+	}
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			for(var i=10;i>=1;i--)
+			{
+				document.writeln(i);//10 9 8 7 6 5 4 3 2 1 
+			}
+
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var sum=0;
+
+			for(var i=1;i<=10;i++)
+			{
+				sum+=i;
+			}
+
+			document.writeln(sum);
+			
+		</script>
+</body>
+</html>
+
+4) for in loop
+===============
+It is used iterate the elements from array.
+
+syntax:
+------
+	for(var <var_name> in array_name)
+	{
+		-
+		- //code to be execute
+		-	
+	}
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+		
+			var arr=[10,20,30];
+
+			for(var i in arr)
+			{
+				document.writeln(arr[i]);
+			}
+
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+		
+			var arr=["Hi","Hello","Bye"];
+
+			for(var i in arr)
+			{
+				document.writeln(arr[i]);
+			}
+
+		</script>
+</body>
+</html>
+
+Interview Questions
+===================
+Q) Write a javascript program to find out factorial of a given number?
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+		
+			var n=5 , fact=1;
+
+			for(var i=n;i>=1;i--)
+			{
+				fact*=i;
+			}
+			document.writeln(fact);
+
+			// 5 * 4 * 3 * 2 * 1 	
+		</script>
+</body>
+</html>
+
+
+Q) Write a javascript program to display reverse of a given number?
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+		
+			var n=123;
+
+			var rem,rev=0;
+
+			while(n>0)
+			{
+				rem=n%10;
+				rev = rev * 10 + rem;
+				n=parseInt(n/10);
+			}
+			
+			document.writeln(rev);
+		</script>
+</body>
+</html>
+
+
+Q) Write a javascript program to display below loop pattern?
+
+* * * * 
+* * * * 
+* * * * 
+* * * * 
+
+ex:
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+		
+			for(var i=1;i<=4;i++)
+			{
+				for(var j=1;j<=4;j++)
+				{
+					document.writeln("*");
+				}
+				//new line
+				document.writeln("<br>");
+			}
+		</script>
+</body>
+</html>
+
+Q) Write a javascript program to display below loop pattern?
+
+* 
+* *  
+* * *  
+* * * * 
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+		
+			for(var i=1;i<=4;i++)
+			{
+				for(var j=1;j<=i;j++)
+				{
+					document.writeln("*");
+				}
+				//new line
+				document.writeln("<br>");
+			}
+		</script>
+</body>
+</html>
+
+Assignment
+==========
+Q) Write a javascript program to display below loop pattern?
+
+*             * 
+* *         * * 
+* * *     * * *
+* * * * * * * *
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

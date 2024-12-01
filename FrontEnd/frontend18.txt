@@ -1,0 +1,929 @@
+Q) What is the difference between == and === equals to ?
+
+==
+----
+It is used to check values are same or not.
+
+ex:
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			document.writeln((10 == 10)+"<br>"); // true 
+
+			document.writeln((10 == "10")+"<br>"); // true 
+
+			document.writeln((0 == false)+"<br>"); // true 
+
+			document.writeln((1 == true)+"<br>"); // true 
+
+		</script>
+</body>
+</html>
+
+
+===
+-----
+It is used to check datatype and value both are same or not.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			document.writeln((10 === 10)+"<br>"); // true 
+
+			document.writeln((10 === "10")+"<br>"); // false
+
+			document.writeln((0 === false)+"<br>"); // false
+
+			document.writeln((1 === true)+"<br>"); // false
+
+		</script>
+</body>
+</html>
+
+
+3) Bitwise operators
+=====================
+We have following list of bitwise operators.
+
+ex:
+	Operator		Description
+	----------		------------
+	&			Bitwise AND 
+	|			Bitwise OR		
+	^			Bitwise XOR 
+	~			Bitwise NOT 
+	>>			Right Shift
+	<<			Left Shift 
+
+Bitwise AND (&)
+----------------
+Bitwise AND operator deals with binary numbers.
+
+Truth table
+------------
+T	T	= T
+T	F	= F 
+F	T	= F 
+F	F	= F 
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var a=10,b=15;
+
+			var c = a & b; 
+
+			document.writeln(c);
+
+			/*
+				10 - 1010
+				15 - 1111
+				----------
+				&  - 1010	
+			*/	
+		</script>
+</body>
+</html>
+
+
+Bitwise OR (|) 
+---------------
+Bitwise OR operator deals with binary numbers.
+
+Truth table
+----------
+T	T	= T
+T	F 	= T
+F	T	= T 
+F	F	= F 
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var a=10,b=15;
+
+			var c = a | b; 
+
+			document.writeln(c);//15
+
+			/*
+				10 - 1010
+				15 - 1111
+				----------
+				|  - 1111
+			*/	
+		</script>
+</body>
+</html>
+
+
+Bitwise XOR (^)
+---------------
+Bitwise XOR operator deals with binary numbers.
+
+Truth table
+----------
+T	T	= F
+T	F	= T
+F	T	= T
+F	F	= F 
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var a=10,b=15;
+
+			var c = a ^ b; 
+
+			document.writeln(c);//5
+
+			/*
+				10 - 1010
+				15 - 1111
+				----------
+				^  - 0101
+			*/	
+		</script>
+</body>
+</html>
+
+Bitwise NOT operator (~)
+-------------------------
+ex:
+	-(n+1)
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i=~10;
+
+			document.writeln(i);//-11
+			
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i=~65;
+
+			document.writeln(i);//-66
+			
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i=~(-98);
+
+			document.writeln(i);//97
+			
+		</script>
+</body>
+</html>
+
+Right shift operator (>>)
+--------------------------
+10 >> 1  = 10/2 
+
+10 >> 2  = 10/4 (2*2)
+
+10 >> 3  = 10/8 (2*2*2)
+
+10 >> 4  = 10/16 (2*2*2*2)
+
+--
+--
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i= 10 >> 3;
+
+			document.writeln(i);//10/8= 1 
+			
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i= 100 >> 7;
+
+			document.writeln(i);//100 / 128 = 0
+			
+		</script>
+</body>
+</html>
+
+
+Left shift operator (<<)
+--------------------------
+10 << 1  = 10*2 
+
+10 << 2  = 10*4 (2*2)
+
+10 << 3  = 10*8 (2*2*2)
+
+10 << 4  = 10*16 (2*2*2*2)
+
+-
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i= 10 << 2;
+
+			document.writeln(i);//10*4 = 40
+			
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var i= 100 << 4;
+
+			document.writeln(i);//100*16=1600
+			
+		</script>
+</body>
+</html>
+
+4) Logical operators 
+=====================
+We have following list of logical operators.
+
+ex:
+	Operator		Description
+	----------		------------
+	logical AND 		&&
+	logical OR 		||
+	logical NOT		!
+
+logical AND (&&)
+----------------
+Logical AND operator deals with boolean values.
+
+Truth table
+-----------
+T	T	= T
+T	F	= F 
+F	T	= F 
+F	F	= F 
+
+ex:
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			document.writeln(((5>2) && (6<10))+"<br>"); // true 
+
+			document.writeln(((5>20) && (6<10))+"<br>"); // false
+
+			document.writeln(((5>20) && (6<1))+"<br>"); // false  	
+			
+		</script>
+</body>
+</html>
+
+
+logical OR (||)
+----------------
+Logical OR operator deals with boolean values.
+
+Truth table
+-----------
+T	T	= T
+T	F	= T 
+F	T	= T 
+F	F	= F 
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			document.writeln(((5>2) || (6<10))+"<br>"); //  true 
+
+			document.writeln(((5>20) || (6<10))+"<br>"); // true 
+
+			document.writeln(((5>20) || (6<1))+"<br>"); //   false 	
+			
+		</script>
+</body>
+</html>
+
+logical NOT (!)
+----------------
+Logical NOT operator deals with boolean values.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			var i = !(10>5);
+
+			document.writeln(i); // false
+			
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			var i = !(10>50);
+
+			document.writeln(i); // true
+			
+		</script>
+</body>
+</html>
+
+5) Assignment operators
+=======================
+We have following list of assignment operators.
+
+ex:
+	Operator		Description 
+	--------		-----------
+	=			equals to 
+	%=			Modules and equals to 
+	/=			Division and equals to 
+	*=			Multiplication and equals to 
+	+=			Addition and equals to 
+	-=			Subtraction and equals to 
+
+ex:
+--
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			var i = 10;
+
+			i%=2;
+
+			document.writeln(i); // 0
+			
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			var i = 10;
+
+			i/=2;
+
+			document.writeln(i); // 5
+			
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			var i = 10;
+
+			i*=2;
+
+			document.writeln(i); // 20
+			
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			var i = 10;
+
+			i-=2;
+
+			document.writeln(i); // 8
+			
+		</script>
+</body>
+</html>
+
+
+6) Special operators
+======================
+We have following list of special operators.
+
+ex:
+	Operator		Description 
+	---------		-----------
+	?:			conditional 
+	new			It is used to create a instance.
+	typeof			It is used to check type of an object.
+
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			(5>2)?document.writeln("TRUE"):document.writeln("FALSE");	
+					
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+
+			(!(5>2))?document.writeln("TRUE"):document.writeln("FALSE");	
+
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			var n=3;
+
+			(n%2==0)?document.writeln("It is even"):document.writeln("It is odd");	
+
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			var i=10;
+			document.writeln(typeof(i)+"<br>");//number
+
+			var j=true;
+			document.writeln(typeof(j)+"<br>");//boolean
+
+			var k='Hi';
+			document.writeln(typeof(k)+"<br>");//string
+
+			var l=null;
+			document.writeln(typeof(l)+"<br>");//object
+
+			var m;
+			document.writeln(typeof(m)+"<br>");//undefined
+
+		</script>
+</body>
+</html>
+
+JavaScript if else statement
+============================
+We have three forms of javascript if else statement.
+
+1) IF STMT 
+
+2) IF ELSE STMT 
+
+3) IF ELSE IF STMT 
+
+1) IF STMT 
+-------------
+It evaluates the code only if our condition is true.
+
+ex:
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			if(5,4,3,2,1,0)
+			{
+				document.writeln("Hi");
+			}
+
+		</script>
+</body>
+</html>
+
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			if(0,1,2,3,4,5)
+			{
+				document.writeln("Hi");
+			}
+
+		</script>
+</body>
+</html>
+
+ex:
+--
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			if((5>2) && (6-6))
+			{
+				document.writeln("Hi");
+			}
+
+		</script>
+</body>
+</html>
+
+
+Q) Write a javascript program to find out greatest of two numbers?
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<script>
+			
+			var val1=prompt("Enter the first number :");
+			var val2=prompt("Enter the second number :");
+
+			var a=parseInt(val1);
+			var b=parseInt(val2);
+
+			if(a>b)
+				document.writeln(a+" is greatest");
+			if(b>a)
+				document.writeln(b+" is greatest");
+
+		</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

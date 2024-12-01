@@ -1,0 +1,414 @@
+Marker interface
+===============
+Interface which does not have any methods or constants is called marker interface.
+
+In general, empty interface is called marker interface.
+
+Using marker interface we will get some ability to do.
+
+We have following marker interface.
+
+ex:
+	Serializable 
+	Cloneable 
+	Remote 
+	and etc.
+
+class  Student implements java.io.Serializable 
+{
+	private int studId;
+
+	//setter method 
+	public void setStudId()
+	{
+		this.studId=studId;
+	}
+	//gettter method 
+	public int getStudId()
+	{
+		return studId;
+	}
+}
+
+
+Abstract class
+===============
+Abstract class is a collection of zero or more abstract methods and concrete methods.
+
+A abstract keyword is applicable for methods and classes but not for variables.
+
+It is not possible to create object for abstract class.
+
+To write the implementation of abstract methods of abstract class we will use sub class.
+
+By default every abstract method is a public and abstract.
+
+Abstract class contains only instance variables.
+
+We can declare abstract class as follow.
+
+syntax:
+-------
+	abstract class  <class_name>
+	{
+		-
+		- // abstract methods 
+		- // concrete methods 
+		- // instance variables 	
+		-	
+	}
+
+If we know partial implementation then we need to use abstract class.
+
+
+ex:
+----
+
+abstract class Plan 
+{
+	//instance variable
+	protected double rate;
+
+	//abstract method
+	public abstract void getRate();
+
+	//concrete method
+	public void getBillDetails(int units)
+	{
+		System.out.println("Total Units :"+units);
+		System.out.println("Total Bill :"+ units*rate);
+	}
+}
+class DomesticPlan extends Plan 
+{
+	public void getRate()
+	{
+		rate=2.5d;
+	}
+}
+class CommercialPlan extends Plan
+{
+	public void getRate()
+	{
+		rate=5.0d;
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		DomesticPlan dp=new DomesticPlan();
+		dp.getRate();
+		dp.getBillDetails(250);
+
+		CommercialPlan cp=new CommercialPlan();
+		cp.getRate();
+		cp.getBillDetails(250);
+	}
+}
+
+
+Q) What is the difference between interface and abstract class?
+
+interface					abstract class
+---------------					---------------
+To declare interface we will use interface 	To declare abstract class we will use abstract
+keyword.					keyword.
+
+It is a collection of abstract methods,default	It is a collection of abstract methods and 
+methods and static methods.			concrete methods.
+
+It contains constants.				It contains instance variables.
+
+We can achieve multiple inheritance.		We can't achieve multiple inheritance.
+
+It does not allow blocks.			It allows blocks.
+
+It does not allow constructors.			It allows constructors.
+
+To write the implementation of abstract 	To write the implementation of abstract methods
+methods we will use implementation class.	we will use sub class.
+
+If we know only specification then we need	If we know partial implementation then we need 
+to use interface.				to use abstract class.
+
+
+
+
+Abstraction
+============
+Hiding internal implementation and highlighting the set of services is called abstraction.
+
+Using interface and abstract class we can implements abstraction.
+
+ex:
+	GUI ATM Machine 
+
+ex:
+---
+abstract class Animal
+{
+	//abstract method
+	public abstract void sound();
+}
+class Cat extends Animal
+{
+	public void sound()
+	{
+		System.out.println("Meow Meow");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Cat c=new Cat();
+		c.sound();
+	}
+}
+
+ex:
+---
+abstract class Animal
+{
+	//abstract method
+	public abstract void sound();
+
+	//concrete method 
+	public static void behaviour()
+	{
+		System.out.println("Eating+Jumping+Sleeping");
+	}
+}
+class Cat extends Animal
+{
+	public void sound()
+	{
+		System.out.println("Meow Meow");
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Cat c=new Cat();
+		c.sound();
+		c.behaviour();
+	}
+}
+
+
+API
+====
+API stands for Application Programming Interface.
+
+API is a base for the programmer to develop software applications.
+
+API is a collection of packages.
+
+We have three set of API's.
+
+1) Predefined API 
+---------------
+	Built-In API is called predefined API.
+	ex:
+		https://docs.oracle.com/javase/8/docs/api/
+
+2) Userdefined API 
+----------------
+	API which is created by the user based on the application requirement.
+	
+
+3) Third party API 
+--------------
+	API which is created by using third party vendor.
+	ex:
+		javazoom API
+		iText API 
+		and etc.
+
+
+
+Package
+========
+A package is a collection of classes, interfaces , enums and annotations.
+
+Here enum is a special class and annotation is a special interface.
+
+In general, a package is a collection of classes and interfaces.
+
+A package is also known as folder or directory.
+
+In java, we have two types of packages.
+
+1) Predefined packages 
+
+2) Userdefined packages 
+
+1) Predefined packages 
+-----------------------
+Built-in packages are called predefined packages.
+ex:
+	java.lang
+	java.io
+	java.time
+	java.text
+	java.util
+	java.util.stream
+	and etc.
+
+2) Userdefined packages 
+----------------------
+A package which is created by the user based on the application requirement is called userdefined
+package.
+
+To declare custom package we need to use "package" keyword.
+
+It is always recommanded to declare package name inthe reverse order of url.
+
+syntax:
+	package   <package_name>;
+
+ex:
+	package   com.qualitythought.www;
+	package   com.google.www;
+	package   com.ihubtalent.www; 
+
+
+ex:
+---
+package  com.ihub.www;
+import java.util.Calendar;
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Calendar c=Calendar.getInstance();
+
+		int h=c.get(Calendar.HOUR_OF_DAY);
+
+		if(h<12)
+			System.out.println("Good Morning");
+		else if(h<16)
+			System.out.println("Good Afternoon");
+		else if(h<20)
+			System.out.println("Good Evening");
+		else 
+			System.out.println("Good Night");
+	}
+}
+
+We can compile above program by using below command.
+ex:
+
+		current directory 
+		      |
+	javac   -d    .     Test.java
+		|
+	destination location 	
+
+
+We can run above program by using below command.
+ex:
+				classname 
+				|
+	java    com.ihub.www.Test
+			| 
+		package name 
+
+Singleton class
+===============
+A class which allows us to create only one object is called singleton class.
+
+If we call any method by using class name and that method returns same class object is called 
+singleton class.
+
+ex:
+	LocalDate date=LocalDate.now();
+	LocalTime time=LocalTime.now();
+	Calendar c=Calendar.getInstance();
+
+To create a singleton class we required private constructor and static method.
+
+ex:
+---
+class Singleton 
+{
+	static Singleton singleton=null;
+
+	private Singleton()
+	{
+	}
+
+	public static  Singleton  getInstance()
+	{
+	
+		if(singleton==null)
+		{
+			singleton=new Singleton();
+		}
+
+		return singleton;
+	}
+}
+
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Singleton s1=Singleton.getInstance();
+		System.out.println(s1.hashCode());
+
+		Singleton s2=Singleton.getInstance();
+		System.out.println(s2.hashCode());
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,164 @@
+Type1 JDBC Driver Architecture / JDBC-ODBC Bridge Driver
+=========================================================
+Type1 JDBC driver is not designed to interact with database software directly.
+
+It is designed to take the support of ODBC Driver and Vendor DB library to locate and interact with database software.
+
+Diagram: jdbc4.1
+
+Advantages:
+
+1) Using Type1 JDBC driver we can interact with any database software.
+
+2) It is a built-in driver of JDK.
+
+Disadvantages:
+
+1) This driver performance is low. It is not suitable for medium and large scale projects.Hence 
+   it is not a industry standard driver.
+
+2) To work with Type1 JDBC we need to arrange ODBC driver and Vendor DB library.
+
+3) Since ODBC driver and vendor db library present at client side. So it is not suitable for untrusted
+   applets to database communication.
+
+
+
+Type2 JDBC Driver Architecture / Native API 
+===========================================
+Type2 JDBC driver is not designed to interact with database software directly.
+
+It is designed to take the support of vendor DB library to locate and interact with database software.
+
+Diagram: jdbc4.2
+
+Advantages:
+
+1) This driver will give better performance when compare to Type1 JDBC Driver.
+
+2) Type2 JDBC driver will not take the support of ODBC driver.
+
+Disadvantages:
+
+1) This driver performance is quit slow. It is not suitable for medium and large scale projects.Hence 
+   it is not a industry standard driver.
+
+2) To work with Type2 JDBC driver we need to arrange vendor db library.
+
+3) Since vendor DB library present at client side so it is not suitable for untrusted applets to 
+   database communication.
+
+
+Type4 JDBC Driver Architecture / Native Protocol / Java Driver
+===============================================================
+Type4 JDBC driver is not designed to take the support of ODBC Driver or Vendor db library.
+
+It is designed to interact with database software directly.
+
+Diagram: jdbc4.3
+
+Advantages:
+
+1) This driver gives better performance when compare to Type1 and Type2 JDBC Driver.
+
+2) This driver is completely developed in java so it will give platform independency.
+
+3) This driver will not take the support of ODBC driver and Vendor DB library.
+
+4) Since ODBC driver and Vendor DB library not present at client side so it suitable for untrusted 
+   applets to database communication
+
+5) It is suitable for medium and large scale projects.Hence it is a industry standard driver.
+
+Disadvantages:
+
+1) It is not a built-in driver of JDK.
+
+2) For every database software we need to arrange type4 jdbc driver seperately.
+
+
+JDBC Connection pool
+=====================
+It is a factory containing a set of readily available JDBC Connection objects before actual being used.
+
+JDBC Connection pool represent connectivity with same database software.
+
+Diagram: jdbc4.4
+
+Advantages:
+
+1) It create reusable JDBC Connection objects.
+
+2) With minimum number of Connection objects we can interact with multiple clients.
+
+3) A programmer is not responsible to create, manage or destroy JDBC Connection objects.
+
+
+Type3 JDBC Driver Architecture / Net Protocol
+==============================================
+Webserver, proxy server or IDE's server contains JDBC Connection pool.
+
+Type3 JDBC Driver is not designed to interact with database software directly. It is designed to interact with Webserver, proxy server or IDE's server to get one reusable JDBC Connection object from JDBC Connection pool.
+
+Diagram: jdbc4.5
+
+With respect to the diagram:
+
+1) Webserver or proxy server interacts with database software and gets some reusable JDBC Conneciton 
+   objects in JDBC Connection pool.
+
+2) Our application interacts with webserver and gets one reusable JDBC Connection object.
+
+3) Our application uses JDBC Connection object to create other JDBC Connections.
+
+4) Once if we call con.close(), JDBC Connection object goes back to JDBC Connection pool.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,275 @@
+Spring Data JPA
+================
+Spring Data JPA handles most of the complexity of JDBC based database acccess and ORM (Object Relational Mapping).
+
+It reduces the boiler place code required by JPA (Java Persistence API). 
+
+It makes the implementation of your persistence layer easier and faster.
+
+Spring data jpa aims to improve the implementation of data access layer by reducing the effort to the amount that is needed.
+
+Spring boot provides spring-boot-starter-data-jpa dependency to connect spring applications with relational database efficiently.
+
+ex:
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-stater-data-jpa</artifactId>
+			<version>2.2.2.RELEASE</version>
+		</dependency>
+
+The spring-boot-starter-data-jpa internally uses the spring-boot-jpa dependency. 
+
+
+Spring Data JPA provides three repositories are as follow.
+
+1) CrudRepository 
+-----------------
+It offers standard create, read, update and delete. 
+It contains methods like findOne(), findAll(),save(), delete() and etc.
+
+2) PagingAndSortingRepository 
+---------------------------
+It extends the CrudRepository. 
+It allows us to sort and retrieve the data in a paginated way.
+
+3) JpaRepository 
+----------------
+It is a JPA specific repository and It is defined in spring data jpa.
+It extends both CrudRepository and PagingAndSortingRepository.
+It adds the JPA-specific methods like flush() to trigger a flush on the persistence context.
+
+
+Spring Boot application interact with H2 Database
+==================================================
+
+Project structure 
+-----------------
+MVCApp2
+|
+|---src/main/java
+|	|
+	|--com.ihub.www
+		|		
+		|---MVCApp2Application.java
+	|
+	|--com.ihub.www.controller
+		|
+		|---EmployeeController.java
+	|
+	|--com.ihub.www.repository
+		|
+		|---EmployeeRepository.java (interface)
+	|
+	|--com.ihub.www.model
+		|
+		|---Employee.java
+
+|---src/main/resources
+	|
+	|---application.properties 
+|
+|---src/test/java
+|
+|------src
+	|
+	|-----main 	
+		|
+		|---webapp (folder)
+			|
+			|---index.jsp 
+|
+|---pom.xml 
+
+step1:
+------
+	Launch STS IDE by choosing workspace location.
+
+step2:
+------
+	Create a spring boot project i.e "MVCApp2".
+	ex:
+		staters:
+				Spring Web 
+				Spring Data JPA
+				H2 Database	
+step3:
+-------
+	Add Tomcat Jasper dependency inside pom.xml file.
+	ex:
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		
+step4:
+-----
+	Create a "index.jsp" file inside "src/main/webapp" folder.
+
+index.jsp
+---------
+<center>
+	<h1 style="text-decoration:underline"> Enter the Details </h1>
+	
+	<br>
+	
+	<form action="addEmp">
+		
+		<table>
+				<tr>
+					<td>Id:</td>
+					<td><input type="text" name="t1"/></td>
+				</tr>
+				
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" name="t2"/></td>
+				</tr>
+				<tr>
+					<td>Address:</td>
+					<td><input type="text" name="t3"/></td>
+				</tr>
+				<tr>
+					<td><input type="reset" value="reset"/></td>
+					<td><input type="submit" value="submit"/></td>
+				</tr>
+			
+		</table>
+		
+	</form>	
+</center>
+	
+step5:
+----
+	Create a model class i.e Employee  inside "com.kits.www.model" package.
+
+Employee.java
+-------------
+package com.ihub.www.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table
+public class Employee 
+{
+	@Id
+	private int empId;
+	
+	@Column
+	private String empName;
+	
+	@Column 
+	private String empAdd;
+
+	public int getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(int empId) {
+		this.empId = empId;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+	public String getEmpAdd() {
+		return empAdd;
+	}
+
+	public void setEmpAdd(String empAdd) {
+		this.empAdd = empAdd;
+	}
+}
+
+step6;
+------
+	Create "EmployeeRepository" inside "com.kits.www.repository" package.
+
+
+EmployeeRepository.java
+------------------------
+package com.ihub.www.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.ihub.www.model.Employee;
+
+@Repository
+public interface EmployeeRepository extends CrudRepository<Employee, Integer>
+{
+
+}
+
+step7:
+------
+	Create a EmployeeContrller inside "com.kits.www.controller" package.
+
+EmployeeController.java
+------------------------
+package com.ihub.www.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ihub.www.model.Employee;
+import com.ihub.www.repository.EmployeeRepository;
+
+@Controller
+public class EmployeeController 
+{
+	@Autowired 
+	EmployeeRepository employeeRepository;
+	
+	@RequestMapping("/")
+	public String home()
+	{
+		return "index.jsp";
+	}
+	
+	@RequestMapping("/addEmp")
+	public String addEmployee(Employee employee)
+	{
+		employeeRepository.save(employee);
+		
+		return "index.jsp";
+	}
+}
+
+step8:
+-----
+	Add Tomcat port number and configure H2 database and hibernate properties inside
+	application.properties file.
+
+application.properties
+----------------------
+
+server.port=9090
+
+spring.datasource.url= jdbc:h2:~/test
+spring.datasource.driverClassName= org.h2.Driver
+spring.datasource.username= sa
+spring.datasource.password= 
+
+spring.h2.console.enabled=true
+
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+spring.jpa.hibernate.ddl-auto=update 
+
+
+step9:
+-----
+	Test the spring boot application.
+	ex:
+		http://localhost:9090
+		http://locahost:9090/h2-console 

@@ -1,0 +1,408 @@
+JSP to Database Communication
+==============================
+Diagram: jsp3.1
+
+
+student table
+--------------
+drop table student;
+
+create table student(sno number(3),sname varchar2(10),sadd varchar2(12));
+
+
+Deployment Directory Structure
+------------------------------
+JspApp5
+|
+|---Java Resources
+|
+|---WebContent
+	|
+	|---form.html
+	|---process.jsp
+	|
+	|---WEB-INF
+		|
+		|------web.xml 
+		|		
+		|------lib
+			|
+			|--ojdbc14.jar
+Note:
+-----
+In above application we need to add "servlet-api.jar" and "ojdbc14.jar" file in project build path.
+
+Copy and paste "ojdbc14.jar" file inside "WEB-INF/lib" folder seperately.
+
+form.html
+--------
+
+<form action="process.jsp">
+	
+	<table align="center">
+		<tr>
+			<td>No:</td>
+			<td><input type="text" name="t1"/></td>
+		</tr>
+		<tr>
+			<td>Name:</td>
+			<td><input type="text" name="t2"/></td>
+		</tr>
+		<tr>
+			<td>Address:</td>
+			<td><input type="text" name="t3"/></td>
+		</tr>
+		<tr>
+			<td><input type="reset" value="reset"/></td>
+			<td><input type="submit" value="submit"/></td>
+		</tr>
+	</table>
+	
+</form>
+
+web.xml
+-------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  <welcome-file-list>
+  	<welcome-file>form.html</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+
+process.jsp
+------------
+
+<%@page import="java.sql.*"  buffer="8kb"  language="java"%>
+<%
+	String sno=request.getParameter("t1");
+
+	int no=Integer.parseInt(sno);
+	String name=request.getParameter("t2");
+	String add=request.getParameter("t3");
+	
+	//insert the data in a database
+	Connection con=null;
+	PreparedStatement ps=null;
+	int result=0;
+	String qry=null;
+	try
+	{
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","admin");
+		qry="insert into student values(?,?,?)";
+		ps=con.prepareStatement(qry);
+		//set the values
+		ps.setInt(1,no);
+		ps.setString(2,name);
+		ps.setString(3,add);
+		
+		//excute 
+		result=ps.executeUpdate();
+		
+		if(result==0)
+			out.println("No Record Inserted");
+		else
+			out.println("Record Inserted");
+		
+		ps.close();
+		con.close();
+	}
+	catch(Exception e)
+	{
+		out.println(e);
+	}
+%>
+
+Request url
+----------
+	http://localhost:2525/JspApp5/
+
+
+Action tags
+============
+Action tags are used to perform perticular task.
+
+Action tags are used to control flow of pages and uses java beans.
+
+Action tags are executed dynamically at runtime.
+
+Action tags internally uses servlet API functionality.
+
+Action tags are divided into two types.
+
+1) Standard Action tags 
+
+2) Custom Action tags 
+
+1) Standard Action tags 
+------------------------
+Built-In tags are called standard action tags.
+
+ex:
+	<jsp:forward>
+	<jsp:include>
+	<jsp:useBean>
+	<jsp:setProperty>
+	<jsp:getProperty> 
+	and etc.
+
+
+Action forward
+================
+In action forward , the output of source JSP program will be discarded and output of destination JSP program goes to browser window as dynamic response.
+
+It internally uses servlet API functionality called rd.forward(req,res).
+
+syntax:
+------
+	<jsp:forward   page="page-name"/>
+
+Deployment Directory Structure
+------------------------------
+JspApp6
+|
+|---Java Resources
+|
+|---WebContent
+	|
+	|---A.jsp
+	|---B.jsp
+	|
+	|---WEB-INF
+		|
+		|------web.xml 
+
+Note:
+-----
+In above application we need to add "servlet-api.jar" file in project build path.
+
+A.jsp
+-----
+<b><i>Begining of A.jsp file </i></b>
+<br>
+<jsp:forward page="B.jsp"/>
+<br>
+<b><i>Ending of A.jsp file </i></b>
+
+B.jsp
+------
+<b><i> This is B.jsp file </i></b>
+
+web.xml
+-------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  <welcome-file-list>
+  	<welcome-file>A.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+
+Request url
+-------
+	http://localhost:2525/JspApp6/
+
+Action include
+==============
+In action include, the output of source JSP program and output of destination JSP program combinely goes to browser window as dynamic response.
+
+It internally uses servlet API functionality called rd.include(req,res).
+
+syntax:
+------
+	<jsp:include  page="page_name"/>
+
+
+Deployment Directory Structure
+------------------------------
+JspApp6
+|
+|---Java Resources
+|
+|---WebContent
+	|
+	|---A.jsp
+	|---B.jsp
+	|
+	|---WEB-INF
+		|
+		|------web.xml 
+
+Note:
+-----
+In above application we need to add "servlet-api.jar" file in project build path.
+
+A.jsp
+-----
+<b><i>Begining of A.jsp file </i></b>
+<br>
+<jsp:include page="B.jsp"/>
+<br>
+<b><i>Ending of A.jsp file </i></b>
+
+B.jsp
+------
+<b><i> This is B.jsp file </i></b>
+
+web.xml
+-------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  <welcome-file-list>
+  	<welcome-file>A.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+
+Request url
+-------
+	http://localhost:2525/JspApp6/
+
+
+
+
+
+JSP to java bean communication
+==============================
+JSP to java bean communication is possible by using following three tags.
+
+1) <jsp:useBean> tag 
+------------------
+	It is used to create and locate bean class object.
+
+2) <jsp:setProperty> tag 
+-----------------------
+	It is used to set the values to bean object and calls setter methods.
+
+3) <jsp:getProperty> tag 
+------------------------
+	It is used to get the values from bean object and calls getter methods.
+
+Note:
+------
+	All the above tags are independent tags.
+	
+Example1:
+
+
+Deployment Directory structure
+------------------------------
+JspApp7
+|
+|---Java Resources
+|	|
+	|------src	
+		|
+		|---com.ihub.www.
+			|
+			|---CuberNumber.java
+|---WebContent 
+|	|
+	|---process.jsp
+	|
+	|---WEB-INF
+		|
+		|---web.xml 
+Note:
+-----
+In above application we need to add "servlet-api.jar" file in project build path.
+
+process.jsp
+------------
+<jsp:useBean id="cn" class="com.ihub.www.CubeNumber"></jsp:useBean>
+
+<center>
+	<h1>
+		<%= "Cube of a given number is ="+cn.cube(5) %>
+	</h1>
+</center>
+
+web.xml
+--------
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  <welcome-file-list>
+  	<welcome-file>process.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>
+
+
+CubeNumber.java
+--------------
+package com.ihub.www;
+
+public class CubeNumber 
+{
+	public int cube(int n)
+	{
+		return n*n*n;
+	}
+}
+
+Request url
+---------
+	http://localhost:2525/JspApp7/
+
+
+Assignment
+==========
+
+Q) Rohan is a kid who has just learned about creating words from alphabets. He has written some words in the notepad of his father's laptop. Now his father want to find the longest word written by Rohan using computer program. Write a program to find the longest string in a given list of Strings ?
+
+input:
+	yes no number
+
+output:
+	number
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

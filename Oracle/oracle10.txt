@@ -1,0 +1,382 @@
+PL/SQL block
+------------
+A PL/SQL program is also known as PL/SQL block.
+
+ex:
+	DECLARE
+	-
+	-	-- Declaration Section 
+	-
+	BEGIN
+	-
+	-	-- Executable Section
+	-
+	EXCEPTION
+	-
+	-	-- Exception Section 
+	-
+	END
+	/
+
+Declaration Section 
+--------------------
+It is used to declare variables, exceptions, cursors and etc.
+It is optional section.
+
+Executable Section
+------------------
+It contains actual logic of PL/SQL program.
+It is a mandatory section.
+
+Exception Section
+----------------
+It contains set of lines which are executed when exception raised.
+It is a optional section.
+
+To see the output in PL/SQL we need to use below command.
+ex:
+	SQL> set   serveroutput  on 
+
+Q) Write a PL/SQL program to display Hello World?
+
+	BEGIN
+	DBMS_OUTPUT.PUT_LINE('Hello World');
+	END;
+	/
+
+	Here DBMS_OUTPUT is a package name.
+	PUT_LINE is a procedure name.
+
+Q) Write a PL/SQL program to perform sum of two numbers?
+
+	DECLARE 
+	A number;
+	B number;
+	C number;
+	BEGIN
+	A:=10;
+	B:=20;
+	C:=A+B;
+	DBMS_OUTPUT.PUT_LINE(C);
+	END;
+	/
+	
+
+Declaration and Initialization using single line.
+
+ex:
+	DECLARE 
+	A number:=10;
+	B number:=20;
+	C number:=A+B;
+	BEGIN
+	DBMS_OUTPUT.PUT_LINE(C);
+	END;
+	/
+
+Using '&' symbol we can read dynamic inputs.
+
+ex:
+	DECLARE 
+	A number(3);
+	B number(3);
+	C number(6);
+	BEGIN
+	A:=&a;
+	B:=&b;
+	C:=A+B;
+	DBMS_OUTPUT.PUT_LINE('Sum of two numbers is '||C);
+	END;
+	/
+
+In PL/SQL , DML operations are allowed.
+
+
+Q) Write a PL/SQL program to insert a record into student table?
+
+
+	DECLARE 
+	L_sno  number(3);
+	L_sname varchar2(10);
+	L_sadd  varchar2(12);
+	BEGIN
+	L_sno:=&sno;
+	L_sname:='&sname';
+	L_sadd:='&sadd';	
+	
+	insert into student values(L_sno,L_sname,L_sadd);
+	DBMS_OUTPUT.PUT_LINE('Record Inserted');
+	END;
+	/
+
+Q) Write a java program to update student name based on student number?
+
+	DECLARE 
+	L_sno number(3);
+	BEGIN
+	L_sno:=&sno;
+	
+	update student set sname='Alan' where sno=L_sno;
+	DBMS_OUTPUT.PUT_LINE('Record Updated');
+	END;
+	/
+
+Q) Write a PL/SQL program to delete student record based on student number?
+
+	DECLARE
+	L_sno number(3);
+	BEGIN
+	L_sno:=&sno;
+	
+	delete from student where sno=L_sno;
+	DBMS_OUTPUT.PUT_LINE('Record Deleted');
+	END;
+	/
+
+In PL/SQL we can perform DRL operations.
+
+To perform select queries we need to use "into" clause.
+
+
+Q) Write a PL/SQL program to display employee name based on employee id?
+
+	DECLARE 
+	L_eid number(3);
+	L_ename varchar2(10);
+	BEGIN
+	L_eid:=&eid;
+
+	select ename into L_ename from emp where eid=L_eid;
+	DBMS_OUTPUT.PUT_LINE(L_ename);
+	END;
+	/
+
+
+Q) Write a PL/SQL program to display employee name and employee salary based on employee id?
+
+	DECLARE 
+	L_eid number(3);
+	L_ename varchar2(10);
+	L_esal number(10,2);
+	BEGIN
+	L_eid:=&eid;
+
+	select ename,esal into L_ename,L_esal from emp where eid=L_eid;
+	DBMS_OUTPUT.PUT_LINE(L_ename||' '||L_esal);
+	END;
+	/
+
+
+Percentage(%) TYPE Attribute
+==============================
+It is used to declare a local variable with respect to the column of a table.
+
+syntax:
+	 variable_name  table_name.col_name%TYPE;
+
+
+Q) Write a PL/SQL program to display employee name and employee salary based on employee id?
+
+	DECLARE 
+	L_eid  emp.eid%TYPE;
+	L_ename  emp.ename%TYPE;
+	L_esal  emp.esal%TYPE;
+	BEGIN
+	L_eid:=&eid;
+	
+	select ename,esal into L_ename,L_esal from emp where eid=L_eid;
+	DBMS_OUTPUT.PUT_LINE(L_ename||' '||L_esal);
+	END;
+	/
+
+
+Percentage(%) ROWTYPE attribute
+================================
+It is used to declare a variable which holds complete row of a table.
+
+A ROWTYPE variable we can't print directly.
+
+To get the value from ROWTYPE attribute we need to use <variable_name>.<column_name>.
+
+syntax:
+		variable_name   table_name%ROWTYPE;
+
+
+Q) Write a PL/SQL program to display employee information whose employee id is 202?
+
+	DECLARE 
+	A emp%ROWTYPE;
+	BEGIN
+	select * into A from emp where eid=202;
+DBMS_OUTPUT.PUT_LINE(A.eid||' '||A.ename||' '||A.esal||' '||A.deptno||' '||A.job||' '||A.comm);
+	
+	END;
+	/	
+
+
+Q) Write a PL/SQL program to display employee information based on employee id?
+
+	DECLARE 
+	L_eid  emp.eid%TYPE;
+	A  emp%ROWTYPE;
+	BEGIN
+	L_eid:=&eid;
+	select * into A from emp where eid=L_eid;
+DBMS_OUTPUT.PUT_LINE(A.eid||' '||A.ename||' '||A.esal||' '||A.deptno||' '||A.job||' '||A.comm);
+	END;
+	/
+
+
+Control Statement
+==================
+We have three control statements in PL/SQL.
+
+1) IF THEN 
+
+2) IF THEN ELSE 
+
+3) IF THEN ELSIF THEN ELSE 
+
+1) IF THEN 
+-----------
+It evaluates the code if our condition is true.
+
+ex:
+	DECLARE 
+	A number:=5000;
+	BEGIN
+	
+	IF A>2000 THEN
+	DBMS_OUTPUT.PUT_LINE('It is greatest');
+	END IF;
+
+	END;
+	/
+
+
+ex:
+	DECLARE 
+	A number:=2000;
+	BEGIN
+	
+	IF A>5000 THEN
+	DBMS_OUTPUT.PUT_LINE('It is greatest');
+	END IF;
+
+	END;
+	/
+
+2) IF THEN ELSE 
+-----------------
+It will evaluate the code either our condition is true or false.
+
+
+ex:
+	DECLARE 
+	A number:=5000;
+	BEGIN
+	
+	IF A>2000 THEN
+	DBMS_OUTPUT.PUT_LINE('It is greatest');
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('It is least');
+	END IF;
+
+	END;
+	/
+
+
+ex:
+	DECLARE 
+	A number:=2000;
+	BEGIN
+	
+	IF A>5000 THEN
+	DBMS_OUTPUT.PUT_LINE('It is greatest');
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('It is least');
+	END IF;
+
+	END;
+	/
+
+3) IF THEN ELSIF THEN ELSE 
+-------------------------
+It will evaluate the code based on multiple conditions.
+
+ex:
+	DECLARE 
+	A number:=103;
+	BEGIN
+	
+	IF A=100 THEN
+	DBMS_OUTPUT.PUT_LINE('It is police number');
+	ELSIF A=103 THEN
+	DBMS_OUTPUT.PUT_LINE('It is enquiry number');
+	ELSIF A=108 THEN 
+	DBMS_OUTPUT.PUT_LINE('It is emergency number');
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('It is invalid option');
+	END IF;
+
+	END;
+	/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

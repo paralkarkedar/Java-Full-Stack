@@ -1,0 +1,470 @@
+DOM 
+====
+DOM stands for Document Object Model.
+
+Whenever HTML document loaded in a browser then it represents document object.
+
+Diagram: frontend23.1
+
+Internally, DOM is a tree node structure.
+
+A document is a root node for entire HTML document.
+
+DOM always look for three nodes.
+
+1) Element node 
+
+2) Attribute node 
+
+3) Text node 
+
+Using document object we can insert dynamic content in our web page.
+
+A document is a property of window object. We can call all the functions of document directly or by using window.
+ex:
+	<script>
+		document.write("Hi");
+		or
+		window.document.write("Hi");
+	</script>
+
+We have following list of functions present in document object.
+
+1) document.write()
+
+2) document.writeln()
+
+3) document.getElementById()
+
+4) document.getElementsByName()
+
+5) document.getElementsByTagName()
+
+6) document.getElementsByClassName() 
+
+7) document.addEventListener()
+
+8) document.removeEventListener()
+
+
+1) document.write()
+---------------------
+It is used to display custom messages without space at the end.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		
+		<script>
+			
+			document.write("IHUB");
+			document.write("TALENT");
+			
+		</script>
+		
+</body>
+</html>
+
+2) document.writeln()
+----------------------
+It is used to display the custom messages with space at the end.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		
+		<script>
+			
+			document.writeln("IHUB");
+			document.writeln("TALENT");
+			
+		</script>
+		
+</body>
+</html>
+
+
+3) document.getElementById()
+---------------------------
+It is used to read the elements by using specified id.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Name: <input type="text" id="t1"/>
+
+		<button onclick="f1()"> submit </button>
+
+		<script>
+			function f1()
+			{
+				var name = document.getElementById('t1').value;
+				document.writeln("Welcome :"+name);
+			}
+		</script>
+		
+		
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Name: <input type="text" id="t1"/>
+
+		<button onclick="f1()"> submit </button>
+
+		<script>
+			function f1()
+			{
+				var name = document.getElementById('t1').tagName;
+				document.writeln("Tag Name :"+name);
+			}
+		</script>
+		
+		
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Name: <input type="text" id="t1"/>
+
+		<button onclick="f1()"> submit </button>
+
+
+		<!-- result here -->
+		<div id="result"></div>
+
+		<script>
+			function f1()
+			{
+				var name = document.getElementById('t1').value;
+				document.getElementById('result').innerHTML="Welcome :"+name;
+			}
+		</script>
+		
+		
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<table align="center">
+			<tr>
+				<td>No1:</td>
+				<td><input type="text" id="t1"/></td>
+			</tr>
+			<tr>
+				<td>No2:</td>
+				<td><input type="text" id="t2"/></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><button onclick="f1()">ADD</button></td>
+			</tr>
+			<tr>
+				<td>Result:</td>
+				<td><div id="result"></div></td>
+			</tr>
+		</table>
+
+		<script>
+			function f1()
+			{
+				var sno1=document.getElementById('t1').value;
+				var sno2=document.getElementById('t2').value;
+				var c = parseInt(sno1)+parseInt(sno2);
+				document.getElementById('result').innerHTML=c;
+			}
+		</script>
+		
+		
+</body>
+</html>
+
+JavaScript program to hide and show a small portion of a form page
+===================================================================
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<fieldset id="cur_id">
+		<legend>Current Address</legend>
+		<table align="center">
+			<tr>
+				<td>House No:</td>
+				<td><input type="text" id="t1"/></td>
+			</tr>
+			<tr>
+				<td>Locality:</td>
+				<td><input type="text" id="t2"/></td>
+			</tr>
+			<tr>
+				<td>City:</td>
+				<td><input type="text" id="t3"/></td>
+			</tr>
+		</table>
+		</fieldset>
+
+		<br>
+		<input type="checkbox" id="box" onclick="f1()" /> Is current address same as permanent address?
+		<br><br>
+
+		<fieldset id="per_id">
+		<legend>Permanent Address</legend>
+		<table align="center">
+			<tr>
+				<td>House No:</td>
+				<td><input type="text" id="t1"/></td>
+			</tr>
+			<tr>
+				<td>Locality:</td>
+				<td><input type="text" id="t2"/></td>
+			</tr>
+			<tr>
+				<td>City:</td>
+				<td><input type="text" id="t3"/></td>
+			</tr>
+		</table>
+		</fieldset>
+
+		<script>
+			function f1()
+			{
+				if(document.getElementById('box').checked)
+				{
+					document.getElementById('per_id').style.display="none";
+				}
+				else
+				{
+					document.getElementById('per_id').style.display="block";
+				}
+			}
+		</script>
+</body>
+</html>
+
+4) document.getElementsByName()
+--------------------------------
+It is used to read the elements by using specified given name.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Name: <input type="text" name="t1"/>
+		<button onclick="f1()"> submit </button>
+
+		<!-- result here -->
+		<div id="result"></div>
+
+		<script>
+			function f1()
+			{
+				var name=document.getElementsByName('t1')[0].value;
+				document.getElementById('result').innerHTML="Hey ! "+name;
+			}
+		</script>
+		
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Name: <input type="text" name="t1"/>
+		<button onclick="f1()"> submit </button>
+
+		<!-- result here -->
+		<div id="result"></div>
+
+		<script>
+			function f1()
+			{
+				var name=document.getElementsByName('t1')[0].tagName;
+				document.getElementById('result').innerHTML="Hey ! "+name;
+			}
+		</script>
+		
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Name: <input type="text" name="t1"/>
+		<button onclick="f1()"> submit </button>
+
+		<!-- result here -->
+		<div id="result"></div>
+
+		<script>
+			function f1()
+			{
+				var name=document.getElementsByName('t1').length;
+				document.getElementById('result').innerHTML="Hey ! "+name;
+			}
+		</script>
+		
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		First Name : <input type="text" name="t1"/> <br>
+		Last Name : <input type="text" name="t2"/> <br>
+		<button onclick="f1()"> submit </button>
+		<br>
+		Full Name : <span id="result"></span>
+
+		<script>
+			function f1()
+			{
+				var name1=document.getElementsByName('t1')[0].value;
+				var name2=document.getElementsByName('t2')[0].value;
+				var fullname=name1+name2;
+				document.getElementById('result').innerHTML=fullname;
+			}
+		</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

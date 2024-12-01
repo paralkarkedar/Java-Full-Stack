@@ -1,0 +1,435 @@
+Alter command
+=============
+Using alter command we can perform following activities very easily.
+
+i) Adding new columns 
+
+ii) Modifying the columns
+
+iii) Renaming the columns 
+
+iv) Dropping the columns 
+
+
+i) Adding new columns 
+---------------------
+Using alter command we can add new columns in a existing table.
+
+syntax:
+-----
+	alter table <table_name> add (col_name datatype(size));
+
+ex:
+	alter table student ADD (state varchar2(10));
+	alter table student ADD (pincode number(8));
+	alter table student ADD (state varchar2(10),pincode number(8));
+
+	update student set state='Telangana' where sno=101;
+
+
+ii) Modifying the columns
+------------------------
+Using alter command we can modify the columns.
+
+We can increase or decrease the size of a column only when existing values are fit into new size.
+
+syntax:
+----
+	alter table <table_name> MODIFY (col datatype(size));
+
+ex:
+	desc student;
+
+	alter table student MODIFY (state varchar2(15));
+
+	desc  student;
+
+
+We can change the datatype of a column only when that column is empty.
+
+ex:
+	desc student;
+
+	alter table student MODIFY (pincode varchar2(8));
+
+	desc student;
+
+
+iii) Renaming the columns 
+----------------------
+Using alter command we can rename the column name.
+
+syntax:
+-------
+	alter table <table_name> rename column <old_name> to <new_name>;
+
+ex:
+	alter table student rename column state to district;
+
+	alter table emp rename  column  esal to dailywages;
+
+	alter table emp rename column job to designation;	
+
+
+
+iv) Dropping the columns 
+----------------------------
+Using alter command we can drop the columns.
+
+syntax:
+	alter table <table_name> drop (col);
+
+ex:
+	alter table student drop (state,pincode);
+	alter table student drop (district,pincode);
+
+
+Copy of a table or duplicate table
+==================================
+Using create and select command we can create copy of a table or duplicate table.
+
+ex:
+
+	create table employees as select * from emp;
+	create table employees as select * from emp where deptno=10;
+	create table employee as select eid,ename,esal from emp;
+	create table employee as select * from emp where eid IN (201,202,203);
+	create table employee as select * from emp where comm is null;
+	create table employee as select * from emp where ename like 'A%';
+	create table employee as select * from emp where eid=201 and ename='Alan';
+	create table employee as select * fro emp where eid<>202;
+
+
+cl scr
+======
+It is used to clear the output screen of SQL command prompt.
+
+syntax:
+------
+	cl   scr 
+
+Functions
+==========
+Functions are used to manipulate the data and give the result.
+
+We have two types of functions.
+
+1) Group Functions  / Multiple row Functions 
+
+2) Scalar Functions / Single row Functions 
+
+
+1) Group Functions 
+-------------------
+Group functions are applicable for multiple rows.
+
+We have following list of group functions.
+
+ex:
+	sum(), avg(), max(), min(), count(*) and count(expression).
+
+
+Q) Write a query to display sum of salary of each employee?
+
+	select sum(esal) from emp;
+
+
+Q) Write a query to display average salary of each employee?
+
+	select avg(esal) from emp;
+
+
+Q) Write a query to display highest salary from emp table?
+
+	select max(esal) from emp;
+
+
+Q) Write a query to display least salary from emp table?
+
+	select min(esal) from emp;
+
+
+Q) What is the difference between count(*) and count(expression)?
+
+count(*)
+--------
+It will return number of records present in a database table.
+
+It will return null records.
+
+ex:
+--
+	select count(*) from emp;
+
+
+count(expression)
+-------------------
+It will return number of values present in a column.
+
+It will not include null values.
+
+ex:
+--
+	select count(eid) from emp; // 6 
+	select count(comm) from emp; // 5 
+
+
+
+userlist table
+==============
+drop table userlist;
+
+create table userlist(uname varchar2(10),pwd varchar2(10));
+
+insert into userlist values('raja','rani');
+
+insert into userlist values('king','kingdom');
+
+commit;
+
+
+Q) Write a query to check given username and password valid or not?
+
+	select count(*) from userlist where uname='raja' AND pwd='rani';  //1  
+
+	select count(*) from userlist where uname='raja' AND pwd='rani2';  //0
+
+Dual table
+===========
+Dual table is a dummy table which is used to perform arithmetic operations and to see the 
+current system date.
+
+Dual table contains one row and one clumn.
+
+ex:
+	select 10+20 from dual;
+
+	select 10*5 from dual; 
+
+	select sysdate from dual;
+
+	select current_date from dual;
+
+
+
+2)Scalar Functions
+==================
+We have following list of scalar functions.
+
+i) Character functions 
+
+ii) Number functions 
+
+iii) Date functions 
+
+iv) Conversion functions 
+
+
+i) Character functions 
+----------------------
+We have following list of character functions.
+
+upper()
+------	
+	It is used to convert the string to uppercase.
+	ex:
+		select upper('oracle training') from dual;
+
+lower()
+---------
+	It is used to convert the string to lowercase.
+	ex:	
+		select lower('ORACLE TRAINING') from dual;
+
+initcap()
+----------
+	It is used to display the string with initial capital letter.
+	ex:
+		select initcap('oracle training') from dual;
+
+lpad()
+-------
+	It is used to pad the characters to left side.
+	ex:
+		select  lpad('oracle',10,'z') from dual; //zzzzoracle 
+
+rpad()
+-------
+	It is used to pad the characters to right side.
+	ex:
+		select  rpad('oracle',10,'z') from dual; //oraclezzzz 
+
+ltrim()
+--------
+	It is used to trim the characters from left side.
+	ex:
+		select ltrim('zzoraclezz','z') from dual;// oraclezz
+
+rtrim()
+-------
+	It is used to trim the characters from right side.
+	ex:
+		select rtrim('zzoraclezz','z') from dual;// zzoracle
+
+
+trim()
+----
+	It is used to trim the characters from both the sides.
+	ex:
+		select trim('z' from 'zzoraclezz') from dual;
+
+concat()
+-------
+	It is used to concatinate two strings.
+	ex:
+		select concat('mega','star') from dual;
+
+		select concat(concat('mega','star'),'chiru') from dual;
+
+replace()
+-------
+	It is used to replace the characters.
+	ex:
+		select replace('gOOgle','O','oo') from dual;
+
+
+ii) Number functions 
+---------------------
+We have following list of number functions.
+
+abs()
+-----
+	It returns absolute value.
+	ex:
+		select abs(-45) from dual; //45
+
+sqrt()
+-----
+	It returns square root value.
+	ex:
+		select sqrt(25) from dual; // 5
+
+power(A,B)
+----------
+	It returns power value.
+	ex:
+		select power(5,3) from dual; //125
+
+greatest()
+----------
+	It return greatest value.
+	ex:
+		select greatest(6,9,2,4) from dual; // 9 
+
+least()
+------
+	It returns least value.
+	ex:
+		select least(6,9,2,4) from dual; //2
+
+ceil()
+-----
+	It returns ceil value.
+	ex:
+		select ceil(10.9) from dual; // 11
+
+		select ceil(10.2) from dual; // 11 
+
+floor()
+------
+	It returns floor value.
+	ex:
+		select floor(9.8) from dual; // 9 
+
+		select floor(9.1) from dual; // 9 
+
+round()
+-----
+	It returns nearest value.
+	ex:
+		select round(10.5) from dual; //11
+
+		select round(10.4) from dual; // 10 
+
+trunc() 
+-----------
+	It removes decimal numbers.
+	ex:
+		select trunc(10.56) from dual; // 10
+
+
+Working with Date values
+=======================
+Every database software support date values.
+
+Every database software support date values in different date patterns.
+
+ex:
+	oracle - dd-MMM-yy
+	mysql  - yyyy-MM-dd
+
+
+emp1 table
+----------
+drop table emp1;
+
+create table emp1(eid number(3),ename varchar2(10),edoj date);
+
+insert into emp1 values(101,'Alan','01-JAN-24');
+
+insert into emp1 values(102,'Jose',sysdate);
+
+insert into emp1 values(103,'Lisa',current_date);
+
+commit;
+
+
+Assignment
+===========
+Q) Write a java program to find out lucky number?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

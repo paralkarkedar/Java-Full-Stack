@@ -1,0 +1,300 @@
+Q) Write a java program to display unique elements from given array?
+
+input:
+	5 8 1 3 7 9 5 1 7 
+
+output:
+	8 3 9
+
+ex:
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		int[] arr={5,8,1,3,7,9,5,1,7};
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			int count=0;
+			
+			for(int j=0;j<arr.length;j++)
+			{
+				if(arr[i]==arr[j])
+				{
+					count++;
+				}
+			}
+			
+			if(count==1)
+				System.out.print(arr[i]+" ");
+		}
+	}
+}
+
+Q) Write a java program to find out most repeating element in a given array?
+
+input:
+	7 3 2 7 3 5 7 3 7 
+
+output:
+	7 repeating for 4 times 
+
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		int[] arr={7,3,2,7,3,5,7,3,7};
+		
+		int maxCount=0;
+		int element=0;
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			int count=0;
+			for(int j=0;j<arr.length;j++)
+			{
+				if(arr[i]==arr[j])
+				{
+					count++;
+				}
+			}
+			if(maxCount<count)
+			{
+				maxCount=count;
+				element=arr[i];
+			}
+		}
+		
+		System.out.println(element+" repeating for "+maxCount+" times");
+	}
+}
+
+
+
+Q) Write a java program to display pair of elements equals to given sum?
+
+Input:
+	arr = 2 4 7 1 9 6 3
+
+	sum = 10 
+
+Output:
+	4 6 
+	7 3 
+	1 9
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		int[] arr ={2,4,7,1,9,6,3};
+		
+		int sum = 10;
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			for(int j=i+1;j<arr.length;j++)
+			{
+				if(arr[i]+arr[j]==sum)
+				{
+					System.out.println(arr[i]+" "+arr[j]);
+				}
+			}
+		}
+	}
+}
+
+Q) Write a java program to display triplet of elements equals to given sum?
+
+Input:
+	arr = 2 4 7 1 9 6 3
+
+	sum = 10 
+
+Output:
+	2 7 1
+	1 6 3
+
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		int[] arr ={2,4,7,1,9,6,3};
+		
+		int sum = 10;
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			for(int j=i+1;j<arr.length;j++)
+			{
+				for(int k=j+1;k<arr.length;k++)
+				{
+					if(arr[i]+arr[j]+arr[k]==sum)
+					{
+						System.out.println(arr[i]+" "+arr[j]+" "+arr[k]);
+					}
+				}
+			}
+		}
+	}
+}
+
+Q) Write a java program to segregate array elements?
+
+input:
+	1 0 0 1 1 0 1 0 0 1
+
+output:
+	0 0 0 0 0 1 1 1 1 1 
+
+ex:
+---
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		int[] arr ={1,0,0,1,1,0,1,0,0,1};
+		
+		int[] newArr=new int[arr.length];
+		
+		
+		//for each loop
+		int j=0;
+		for(int i:arr)
+		{
+			if(i==0)
+			{
+				newArr[j++]=i;
+			}
+		}
+		
+		//inserting '1's 
+		while(j<arr.length)
+		{
+			newArr[j++]=1;
+		}
+		
+		//display
+		for(int i:newArr)
+		{
+			System.out.print(i+" ");
+		}
+	}
+}
+
+
+
+Q) Write a java program to find out leader elements from given array?
+
+Input:
+	4 9 32 6 12 1 8 
+
+output:
+	8 12 32
+
+ex:
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		int[] arr={4,9,32,6,12,1,8};
+		
+		int max=arr[arr.length-1];	
+		
+		System.out.print(max+" ");
+		
+		//reading reverse 
+		for(int i=arr.length-2;i>=0;i--)
+		{
+			if(arr[i]>max)
+			{
+				max=arr[i];
+				System.out.print(max+" ");
+			}
+		}
+	}
+}
+
+
+Q) Write a java program to find out missing element from given array?
+
+input:
+	7 1 3 5 2 6 
+
+output:
+	4
+
+ex:
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		int[] arr={7,1,3,5,2,6};
+		
+		int sum_of_arr=arr.length+1; 
+		
+		int sum=(sum_of_arr * (sum_of_arr + 1))/2;
+		
+		for(int i:arr)
+		{
+			sum = sum - i;	
+		}
+		
+		System.out.println(sum);
+	}
+}
+
+Assignment
+===========
+
+Q) Write a java program to merge two arrays and display them in a sorting order?
+
+input:
+	6 9 7 8 10
+	5 2 1 3 4 
+
+output:
+	1 2 3 4 5 6 7 8 9 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

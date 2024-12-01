@@ -1,0 +1,284 @@
+TreeMap 
+========
+The underlying data structure is RED BLACK TREE.
+
+Duplicate keys are not allowed but values can be duplicate.
+
+Insertion is not preserved because it will take sorting order of key.
+
+If we depend upon default natural sorting order then keys must be homogeneous.
+
+If we depend upon customized sorting order then keys must be hetrogeneous and non-comparable.
+
+Null insertion is not possible for key but value can be null.
+
+ex:
+----
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		TreeMap<Integer,String> tm=new TreeMap<Integer,String>();
+		tm.put(10,"ten");
+		tm.put(1,"one");
+		tm.put(5,"five");
+		System.out.println(tm);//{1=one, 5=five, 10=ten}
+		
+		tm.put(1,"gogo");
+		System.out.println(tm);//{1=gogo, 5=five, 10=ten}
+		
+		tm.put(6,null);
+		System.out.println(tm);//{1=gogo, 5=five, 6=null, 10=ten}
+		
+		//tm.put(null,"seven");
+		//System.out.println(tm);//R.E .NullPointerException
+	}
+}
+
+Hashtable
+=========
+The underlying data structure is Hashtable.
+
+Duplicate keys are not allowed but values can be duplicate.
+
+Insertion order is not preserved because it takes descending order of key.
+
+Hetrogeneous objects are allowed for both key and value.
+
+Null insertion is not possible for both key and value.
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		Hashtable ht=new Hashtable();
+		ht.put(1,"one");
+		ht.put(10,"ten");
+		ht.put(5,"five");
+		System.out.println(ht);//{10=ten, 5=five, 1=one}
+		
+		ht.put(1,"gogo");
+		System.out.println(ht);//{10=ten, 5=five, 1=gogo}
+		
+		ht.put("six",6);
+		System.out.println(ht);//{10=ten, six=6, 5=five, 1=gogo}
+		
+		//ht.put(4,null);
+		//System.out.println(ht);//R.E NullPointerException
+		
+		//ht.put(null,"four");
+		//System.out.println(ht);//R.E NullPointerException 
+	}
+}
+
+Interview Questions
+-------------------
+
+Q)Write a java program to find out lucky number in a given array?
+
+Input:
+	1 1 2 4 4 3 3 3 
+
+Output:
+	3 
+
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		int[] arr={1,2,2,3,3,3};
+		
+		Map<Integer,Integer> map=new LinkedHashMap<Integer,Integer>();
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			if(map.containsKey(arr[i]))
+			{
+				map.put(arr[i],map.get(arr[i])+1);
+			}
+			else
+			{
+				map.put(arr[i],1);
+			}
+		}
+		
+		int x=0;
+		int max=-1;
+		
+		for(Map.Entry<Integer,Integer> entry: map.entrySet())
+		{
+			if(entry.getKey() == entry.getValue())
+			{
+				x = entry.getValue();
+				max= Math.max(max,x);
+			}
+		}
+		
+		System.out.println(max);
+	}
+}
+
+
+Q) Write a java program to find out occurance of a given string?
+
+Input:
+	this is is java java class 
+
+output:
+	this=1  is=2  java=2  class=1
+
+ex:
+
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="this is is java java class";
+		String[] sarr=str.split(" ");
+		
+		Map<String,Integer> map=new LinkedHashMap<String,Integer>();
+		
+		for(String s:sarr)
+		{
+			if(map.get(s)!=null)
+			{
+				map.put(s,map.get(s)+1);
+			}
+			else
+			{
+				map.put(s,1);
+			}
+		}
+		
+		map.forEach((key,value)-> System.out.print(key+"="+value+" "));
+	}
+}
+
+Q) Write a java program to find out occurance of a given characters?
+
+Input:
+	java
+
+output:
+	j=1 a=2 v=1 
+
+ex:
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="java";
+		char[] carr=str.toCharArray();
+		
+		Map<Character,Integer> map=new LinkedHashMap<Character,Integer>();
+		
+		for(char c:carr)
+		{
+			if(map.get(c)!=null)
+			{
+				map.put(c,map.get(c)+1);
+			}
+			else
+			{
+				map.put(c,1);
+			}
+		}
+		
+		map.forEach((key,value)-> System.out.print(key+"="+value+" "));
+	}
+}
+
+q) What is the difference between Collection and Collections? 
+ 
+Collection 					Collections 
+------------------				-----------------------
+It is a root interface for entire collection 	It is a utility class.
+framework. 
+ 
+It is used to represent a group of individual 	It defines several utility methods that are 
+objects in a single unit.			used to operate on collection. 
+
+It contains abstract methods, static 		It contains only static methods.
+methods and default methods. 
+
+
+Q) How to make ArrayList as synchronized?
+
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<String> al=new ArrayList<String>();
+		al.add("java");
+		al.add("oracle");
+		al.add("html");
+		al.add("reactjs");
+		System.out.println(al); //[java, oracle, html, reactjs]
+		
+		List<String> synchronizedList= Collections.synchronizedList(al);
+		
+		for(String s :synchronizedList)
+		{
+			System.out.print(s+" ");
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

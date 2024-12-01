@@ -1,0 +1,276 @@
+Graphics in HTML
+=================
+There are two ways to draw the graphics in HTML.
+
+1) SVG 
+
+2) CANVAS 
+
+1) SVG 
+-------
+SVG stands for Scalable Vector Graphics.
+
+SVG is used to draw two-dimensional vector based graphics in HTML.
+
+World Wide Web Consortium (W3C) prefers SVG technology to draw the graphics in HTML.
+
+A <svg> tag/element is a container tag for vector graphics.
+
+A <svg> tag/element contains various methods to display circle, rectangle, polygon ,
+graphic images and etc.
+
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MyPage!</title>
+	</head>
+	<body>
+			<svg style="border:2px solid black;width:300px;height:300px;">
+				
+			</svg>
+	</body>
+</html>
+
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MyPage!</title>
+	</head>
+	<body>
+			<svg style="border:2px solid black;width:300px;height:300px;">
+				<circle cx="100px" cy="100px"  r="80px"
+				fill="#FFFF00" stroke="#FF0000" stroke-width="5px">
+			</svg>
+	</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MyPage!</title>
+	</head>
+	<body>
+			<svg style="border:2px solid black;width:300px;height:300px;">
+				<rect x="50px" y="50px"  width="150px" height="100px"
+				fill="#FFFF00" stroke="#FF0000" stroke-width="5px">
+			</svg>
+	</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MyPage!</title>
+	</head>
+	<body>
+			<svg style="border:2px solid black;width:300px;height:300px;">
+				<polygon points="100,40 150,190 50,190"
+				fill="#FFFF00" stroke="#FF0000" stroke-width="5px">
+			</svg>
+	</body>
+</html>
+
+2) CANVAS 
+----------
+A <canvas> tag is used to draw vector graphics via javascript.
+
+A <canvas> tag/element is a container tag.
+
+A <canvas> tag/element contains various methods to display lines,circle,rectangle,polygon,
+graphic images and etc.
+ex:
+--
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MyPage!</title>
+	</head>
+	<body>
+			<canvas id="myId" style="border:2px solid black;width:300px;height:300px">
+			
+			</canvas>
+			
+			<script>
+					var context=document.getElementById('myId');
+					var c=context.getContext("2d");
+					c.moveTo(0,0);
+					c.lineTo(800,400);
+					c.stroke();
+			</script>
+	</body>
+</html>
+
+ex:
+--
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MyPage!</title>
+	</head>
+	<body>
+			<canvas id="myId" style="border:2px solid black;width:300px;height:300px">
+			
+			</canvas>
+			
+			<script>
+					var context=document.getElementById('myId');
+					var c=context.getContext("2d");
+					c.beginPath();
+					c.arc(95, 50, 40, 0, 2 * Math.PI);
+					c.stroke();
+			</script>
+	</body>
+</html>
+
+ex:
+--
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MyPage!</title>
+	</head>
+	<body>
+			<canvas id="myId" style="border:2px solid black;width:300px;height:300px">
+			
+			</canvas>
+			
+			<script>
+					var context=document.getElementById('myId');
+					var c=context.getContext("2d");
+					c.font = "20px Georgia";
+					c.fillText("Hello World!", 40, 50);
+			</script>
+	</body>
+</html>
+
+
+Q) What is the difference between HTML and HTML5?
+
+HTML						HTML5
+------						-----
+1)To represent HTML document we need to use     To represent HTML5 document we need to use 
+  <!DOCTYPE>.					<!DOCTYPE html>.
+
+2)HTML is bit slow.				HTML5 is more faster because it is leight weight.
+
+3)HTML is not efficient.			HTML5 is more efficient.
+
+4)HTML is inflexible for the developer.		HTML5 is flexible for the developer.
+
+5)HTML is Less mobile friendly.			HTML5 is mobile friendly.
+
+6)Does not support drag and drop effects.	It supports Drag and Drop effects.
+
+7)Not supported Audio and video without using	Supports audio and video with the help of 
+  flash player.					<audio> and <video> tag without using flash player.
+
+8)IT does not support javascript to run	        It supports javascript to run in background with 
+  on browser.					the help of JS Web Worker API.
+
+
+9)Vector graphics supported with the help of    Vector graphics is supported with the help of 
+  technologies such as VML,Silver light,adobe   internal technologies such as SVG and CANVAS.
+  flash and etc.
+
+10)Can't handle inaccurate syntax.		IT can handle Inaccurate syntax.
+
+
+11)shapes like circle,rectangle,triangle	Shapes like circle ,triangle,rectangle
+   are not possible to draw.			are possible to draw.
+
+
+
+Q) What are the tags removed from HTML5?
+
+<acronym> , <applet> , <basefont> , <big> , <center> , <dir> , <font> , <frame> , <frameset> , <noframes> , <isindex> , <strike> , <s> , <u> and etc
+
+
+Q) What are the tags introduced in HTML5?
+
+<header>, <section>, <article> , <aside> , <footer>, <canvas> , <audio> , <video>,
+<nav>, <data>, <time> , <iframe> and etc.	
+
+
+Q) What is the difference between div tag and span tag?
+
+div tag						span tag 
+---------					-------------
+It is a block element.				It is a inline element.
+
+It is used to wrap section of a document.	It is used to wrap small portion of a text.
+
+It is used to create CSS based layouts.		It is used to stylize the text.
+
+					
+How HTML document execute in a browser window
+==============================================
+Diagram: frontend7.1
+
+First HTML parser will parse the data from HTML document.
+
+Later , HTML parser will handover the data to DOM.
+
+DOM stands for Document Object Model.
+
+DOM is used to represent our HTML document to Tree node structure.
+
+Finally, tree node structure will execute in a browser window.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

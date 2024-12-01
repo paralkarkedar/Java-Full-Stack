@@ -1,0 +1,223 @@
+JDBC
+=====
+As if now it is known as trademark.
+
+But earlier it is also known as Java Database Connectivity.
+
+RAM is a temporary storage device.
+
+During the program execution our data will store in a RAM.
+
+Once the program execution is completed we will loss the data.
+
+To overcome this limitation we are making our application writing the data in a file or database software.
+
+Files and Database software act like a permanent storage device or medium.
+
+
+Persistence
+===========
+The process of storing and managing the data for a long period of time is called persistence.
+
+
+Important terminologies
+=======================
+1) Persistence store 
+-------------------
+	It is a place where we can store and manage the data for a long period of time.
+	ex:
+		File 
+		Database S/W 
+		and etc.
+
+2) Persistence data 
+------------------
+	Data of a persistence store is called persistence data.
+	ex:
+		Records
+		Tables 
+		and etc.
+
+3) Persistence operation 
+-----------------------
+	Insert, update ,delete ,create and select are called persistence operations.
+	In realtime this operation is also known as CURD , CRUD or SCUD operation.
+	ex:	
+		C - create 		S - select 
+		U - update 		C - create
+		R - read 		U - update 
+		D - delete 		D - delete 
+
+4) Persistence logic 
+-------------------
+	A logic which is capable to perform persistence operations is called persistence logic.
+	ex:
+		JDBC Code 
+		Hibernate code 
+		IOStream 
+
+5) Persistence technology 
+------------------------
+	A technology which is used to develop persistence logics is called persistence technology.
+	ex:
+		JDBC 
+		Hibernate 
+		IBatis 
+		JPA 
+		and etc.
+
+
+Q) What is JDBC ? 
+
+JDBC is a persistence technology which is used to develop persistence logics having the capability to perform persistence operations on persistence data of a persistence store.
+
+
+
+Limitations with File as a persistence store
+=============================================
+> We can store limited amount of data.
+
+> There is no security.
+
+> Fetching the data with multiple conditions is not possible.
+
+> It does not allow us to apply constraints.
+
+> It does not allow us to show an application with relationship.
+
+> Updation and Deletion of data can't be done directly.
+
+> Merging and comparision of data can't be done easily.
+
+
+Advantages of database as a persistence store
+==============================================
+> We can store unlimited amount of data.
+
+> There is a security.
+
+> It supports common query language.
+
+> Fetching the data with multiple condition is possible.
+
+> It allows us to apply constraints.
+
+> It shows an application with relationship.
+
+> Updation and deletion of data can be done directly.
+
+> Merging and comparision of data can be done easily.
+
+Note:
+-----
+				IOStream 
+	JavaApp	----------------------------------------------- File 	
+			Serialization/Deserialization 
+
+
+	
+				JDBC Code 
+	JavaApp ----------------------------------------------- Database S/W 
+
+
+Serialization
+--------------
+The process of taking object data storing in a file is called serialization.
+
+In general, The process of converting object state to file state is called serialization.
+
+Diagram: jdbc1.1
+
+
+Deserialization
+-----------------
+The process of take the data from file and representing an object is called deserialization.
+
+In general, The process of converting file state to object state is called deserialization.
+
+Diagram: jdbc1.2
+
+
+
+Serializable Marker interface
+=============================
+It is an interface which is present in java.io package.
+
+A class that implements this interface can be serialized, meaning its objects can be converted into a byte stream for storage or transmission.
+
+ex:
+
+import java.io.*;
+class Person implements Serializable 
+{
+    	private String name;
+    	private int age;
+
+    	public Person(String name, int age) 
+		{
+        		this.name = name;
+        		this.age = age;
+    	}
+		public String toString() 
+		{
+        		return "Person: {name='" + name + "', age=" + age + "}";
+    	}	
+}
+
+public class Test 
+{
+    public static void main(String[] args) 
+	{
+        
+		Person person = new Person("Alan", 30);
+
+        
+		// Serialize the object
+		//try with resource
+		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("suman.txt"))) 
+		{
+           	 	out.writeObject(person);
+            	System.out.println("Object serialized: " + person);
+        } 
+		catch (IOException e) 
+		{
+            	e.printStackTrace();
+        }
+	
+        // Deserialize the object
+		// try with resources
+		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("suman.txt"))) 
+		{
+			Person deserializedPerson = (Person) in.readObject();
+            System.out.println("Object deserialized: " + deserializedPerson);
+        } 
+		catch (IOException | ClassNotFoundException e) 
+		{
+            e.printStackTrace();
+        }		
+	
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

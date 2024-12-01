@@ -1,0 +1,409 @@
+ex:
+---
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String s1="ihub";
+		String s2="ihub";
+
+		if(s1.equals(s2))
+			System.out.println("Both are same");
+		else
+			System.out.println("Both are not same");
+	}
+}
+
+ex:
+---
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String s1="ihub";
+		String s2="IHUB";
+
+		if(s1.equalsIgnoreCase(s2))
+			System.out.println("Both are same");
+		else
+			System.out.println("Both are not same");
+	}
+}
+
+Q) Write a java program to perform right rotation of a given string?
+
+input:
+	str = ihubtalent 
+
+	cnt = 4
+
+output:
+	talentihub	
+
+ex:
+---
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="ihubtalent";    
+		int cnt=4;
+
+		String word1=str.substring(cnt,str.length());
+
+		String word2=str.substring(0,cnt);
+
+		System.out.println(word1+word2);
+	}
+}
+
+
+Q) Write a java program to display given output?
+
+input:
+	str = ihubstudent
+	index = 4
+	insert = for 
+
+output:
+	ihubforstudent 
+
+ex:
+---
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str ="ihubstudent";
+		int index = 4;
+		String insert = "for"; 
+
+		String word1=str.substring(0,index);
+		String word2=str.substring(index,str.length());
+
+		System.out.println(word1+insert+word2);
+
+	}
+}
+
+	
+Q) Write a java program to display reverse of a given string?
+
+input:
+	hello
+
+output:
+	olleh 
+
+ex:
+--
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="hello";              
+
+		String rev="";
+		for(int i=str.length()-1;i>=0;i--)
+		{
+			rev+=str.charAt(i);
+		}
+		System.out.println(rev);
+	}
+}
+
+approach2
+----------
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="hello";              
+
+		char[] carr=str.toCharArray();
+
+		//reading reverse from array
+		String rev="";
+		for(int i=carr.length-1;i>=0;i--)
+		{
+			rev+=carr[i];
+		}
+
+		System.out.println(rev);
+	}
+}
+
+Q) Write a java program to display the string in sorting order?
+
+input:
+	dzbea
+
+output:
+	abdez
+
+ex:
+
+import java.util.Arrays;
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="dzbea";              
+
+		char[] carr=str.toCharArray();
+		
+		Arrays.sort(carr);
+
+		//for each loop
+		for(char c:carr)
+		{
+			System.out.print(c);
+		}
+		
+	}
+}
+
+Q) Write a java program to check given string is palindrome or not?
+
+input:
+	racar 
+
+output:
+	It is a palindrome string 
+
+ex:
+---
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="racar";              
+		
+		String rev="";
+		for(int i=str.length()-1;i>=0;i--)
+		{
+			rev+=str.charAt(i);
+		}
+
+		if(str.equals(rev))
+			System.out.println("It is a palindrome string");
+		else
+			System.out.println("It is not a palindrome string");
+	}
+}
+
+
+Q) Write a java program to display reverse of a sentence ?
+
+input:
+	This is java class 
+
+output:
+	class java is This 
+
+ex:
+	
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="This is java class";
+
+		String[] sarr=str.split(" "); // This     is     java     class
+
+		//reading reverse
+		for(int i=sarr.length-1;i>=0;i--)
+		{
+			System.out.print(sarr[i]+" ");
+		}
+	}
+}
+
+Q) Write a java program to display reverse of a word in a string?
+
+input:
+	This is java class
+
+output:
+	sihT si avaj ssalc 
+
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="This is java class";
+
+		String[] sarr=str.split(" "); // This   is   java    class 
+
+		//for each loop
+		for(String s:sarr)
+		{
+			char[] carr=s.toCharArray(); // T   h  i  s 
+			
+			//reading reverse 
+			for(int i=carr.length-1;i>=0;i--)
+			{
+				System.out.print(carr[i]);
+			}
+
+			//space 
+			System.out.print(" ");
+		}
+	}
+}
+
+
+Q) Write a java program to display the string starting with uppercase letter?
+
+input:
+	This is Java class For students
+
+ex:
+	This  Java  For 
+
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="This is Java class For students";
+
+		String[] sarr=str.split(" "); //This  is  Java  class For students
+
+		for(String s:sarr)
+		{
+			char ch=s.charAt(0);
+
+			if(ch>='A' && ch<='Z')
+			{
+				System.out.print(s+" ");
+			}
+		}
+	}
+}
+
+Q) Write a java program display unique and duplicate characters from given string?
+
+input:
+	google
+
+output:
+	unique = gole
+	duplicate = og  
+
+
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="mississippi";
+
+		String duplicate="";
+		String unique="";
+
+		for(int i=0;i<str.length();i++)
+		{
+			String current=Character.toString(str.charAt(i));
+
+			if(unique.contains(current))
+			{
+				if(!duplicate.contains(current))
+				{
+					duplicate+=current;
+					continue;
+				}
+				else
+				{
+					continue;
+				}
+			}
+			unique+=current;
+		}
+
+		System.out.println("Unique = "+unique);
+		System.out.println("Duplicate = "+duplicate);
+	}
+}
+
+
+Q) Write a java program to display most repeating character from given string?
+
+input:
+	ihubtalentinstitute
+
+output:
+	t repeating for 5 times 
+
+ex:
+---
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="ihubtalentinstitute";
+
+		char alphabet=' ';
+		int maxCount=0;
+
+		for(int i=0;i<str.length();i++)
+		{
+			int cnt=0;
+
+			for(int j=0;j<str.length();j++)
+			{
+				if(str.charAt(i) == str.charAt(j))
+				{
+					cnt++;
+				}
+			}
+
+			if(maxCount<cnt)
+			{
+				maxCount=cnt;
+				alphabet=str.charAt(i);
+			}
+		}
+		System.out.println(alphabet+" is repeating for "+maxCount+" times");
+	}
+}
+
+
+Assignment
+===========
+Q) Write a java program to display palindrome string?
+
+input:
+	racar is madam for student
+
+output:
+	racar  madam 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

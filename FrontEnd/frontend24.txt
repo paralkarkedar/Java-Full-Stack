@@ -1,0 +1,463 @@
+JavaScript program to select multiple checkboxes
+=================================================
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Is Course Completed?
+		<br><br>
+		<button onclick="f1()"> Select All </button>
+		<br><br>
+
+		<input type="checkbox" name="box" value="html"/> HTML <br>
+		<input type="checkbox" name="box" value="css"/> CSS   <br>
+		<input type="checkbox" name="box" value="js"/> JAVASCRIPT
+
+		<script>
+			function f1()
+			{
+				var x=document.getElementsByName('box');
+
+				for(var i=0;i<x.length;i++)
+				{
+					if(x[i].type=="checkbox")
+					{
+						x[i].checked=true;
+					}
+				}
+			}
+		</script>
+
+</body>
+</html>
+
+document.getElementsByTagName()
+================================
+It is used to return collection of elements with specified tag name.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Name: <input type="text" />
+
+		<button onclick="f1()"> submit </button>
+
+		<script>
+			function f1()
+			{
+				var val=document.getElementsByTagName('input').length;
+				document.writeln(val);
+			}
+		</script>
+
+
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		Name: <input type="text" />
+
+		<button onclick="f1()"> submit </button>
+
+		<script>
+			function f1()
+			{
+				var val=document.getElementsByTagName('input')[0].value;
+				document.writeln(val);
+			}
+		</script>
+
+
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<div> Division One </div>
+		<div> Division Two </div>
+		<div> Division Three </div>
+		<button onclick="f1()"> Change </button>
+
+		<script>
+			function f1()
+			{
+				var x=document.getElementsByTagName('div');
+				x[0].innerHTML="HTML class";
+				x[1].innerHTML="CSS class";
+				x[2].innerHTML="JavaScript class";
+
+				x[0].style.backgroundColor="cyan";
+				x[1].style.color="blue";
+				x[2].style.color="blue";
+				x[2].style.backgroundColor="cyan";
+			}
+		</script>	
+</body>
+</html>
+
+document.getElementsByClassName()
+==================================
+It is used to return collection of elements with specified class name.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+	<style>
+		.myClass
+		{
+			font-size:30px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+		<div class="myClass"> This is division </div>
+
+		<button onclick="f1()"> submit </button>
+
+		<script>
+			function f1()
+			{
+				var val=document.getElementsByClassName('myClass')[0].tagName;
+				document.writeln(val);
+			}
+		</script>
+
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+	<style>
+		.myClass
+		{
+			font-size:30px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+		<div class="myClass"> This is division </div>
+
+		<button onclick="f1()"> submit </button>
+
+		<script>
+			function f1()
+			{
+				var val=document.getElementsByClassName('myClass').length;
+				document.writeln(val);
+			}
+		</script>
+
+</body>
+</html>
+
+document.addEventListener()
+============================
+It is used to attach/add event handler to the specific element.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<h1> Click Anywhere  </h1>
+		
+		<script>
+			document.addEventListener('click',function(){
+				alert("Yahooo! you clicked");
+			});
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<h1> Click Anywhere  </h1>
+
+		<script>
+			document.addEventListener('click',f1);
+
+			function f1()
+			{
+				alert("Yes ! once again");
+			}
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<h1 id="hover"> Mouse Over Here !!!  </h1>
+
+		<div id="result"></div>
+
+		<script>
+			var x=document.getElementById('hover');
+			x.addEventListener('mouseover',f1);
+			function f1()
+			{
+				document.getElementById('result').innerHTML="Mouse Over Here";
+			}
+		</script>
+</body>
+</html>
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<h1 id="hover"> Mouse Out Here !!!  </h1>
+
+		<div id="result"></div>
+
+		<script>
+			var x=document.getElementById('hover');
+			x.addEventListener('mouseout',f1);
+			function f1()
+			{
+				document.getElementById('result').innerHTML="Mouse Out Here";
+			}
+		</script>
+</body>
+</html>
+
+JavaScript program to convert Feet to Inches
+=============================================
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<center>
+			<h2>Convertion Application</h2>
+		</center>
+
+		<table align="center">
+			<tr>
+				<td>Feet</td>
+				<td>&nbsp;</td>
+				<td>Inches</td>
+			</tr>
+			<tr>
+				<td><input type="text" id="feet"/></td>
+				<td><big>=</big></td>
+				<td><input type="text" id="inches"/></td>
+			</tr>
+		</table>
+
+		<script>
+			var feet=document.getElementById('feet');
+			var inches=document.getElementById('inches');
+
+			feet.addEventListener('input',function(){
+				var f=this.value;
+				var i=f*12;
+				inches.value=i;
+			});
+
+			inches.addEventListener('input',function(){
+				var i=this.value;
+				var f=i/12;
+				if(!Number.isInteger(f))
+				{
+					f=f.toFixed(2);
+				}
+				feet.value=f;
+			})
+
+
+		</script>
+</body>
+</html>
+
+document.removeEventListener()
+==============================
+It is used to remove event handler from perticular element.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MyPage!</title>
+</head>
+<body>
+		<h3 id="hover"> Mouse Over Here </h3>
+		
+		<br>
+		<button onclick="f2()"> stop </button>
+
+		<div id="result"></div>
+
+
+		<script>
+			var x=document.getElementById('hover');	
+			x.addEventListener('mouseover',f1);
+
+			function f1()
+			{
+				document.getElementById('result').innerHTML+="<p>Mouse over here</p>";
+			}
+
+			function f2()
+			{
+				x.removeEventListener('mouseover',f1);
+				document.getElementById('result').innerHTML+="<p>Mouse over stop</p>";
+			}
+		</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

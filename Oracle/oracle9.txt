@@ -1,0 +1,273 @@
+Merge command
+=============
+Merge command is possible by using update and insert command.
+
+ex:
+
+student10 table
+---------------
+drop table student10;
+create table student10(sno number(3),sname varchar2(10),sadd varchar2(12));
+insert into student10 values(101,'raja','hyd');
+insert into student10 values(102,'ravi','delhi');
+insert into student10 values(103,'ramana','vizag');
+commit;
+
+student20 table
+---------------
+drop table student20;
+create table student20(sno number(3),sname varchar2(10),sadd varchar2(12));
+insert into student20 values(103,'Alan','Florida');
+insert into student20 values(104,'John','Texas');
+commit;
+
+
+merge into student10 s1
+using student20 s2
+ON(s1.sno=s2.sno)
+when matched then 
+update set sname=s2.sname,sadd=s2.sadd
+when not matched then 
+insert(sno,sname,sadd) values(s2.sno,s2.sname,s2.sadd);
+ 
+select * from student10;
+
+select * from student20;
+
+
+Sub Queries
+============
+We will declare a query inside another query such concept is called sub query.
+
+In sub query , first inner query will execute then outer query.
+
+Sub queries are used to select the records based on unknown values.
+
+We have following list of sub queries.
+
+1) Single Row subquery
+
+2) Multiple Row subquery
+
+3) Multiple Column subquery 
+
+
+1) Single Row subquery
+-----------------------
+If a sub query returns only one row is called single row sub query.
+
+Sub queries can be nested upto 32 levels.
+
+ex:
+	SQL
+	----
+		select * from emp where eid=201;
+
+	Subquery
+	--------
+		select * from emp where eid=(select eid from emp where ename='Alan');
+
+ex:
+	SQL
+	---
+		select * from emp where eid=201 and ename='Alan';
+
+	Subquery
+	---------	
+		select * from emp where eid=(select eid from emp where ename='Alan')
+		 and ename=(select ename from emp where esal=9000);
+
+
+Q) Write a query to display employees information whose salary is greater then mark salary?
+
+	
+	select * from emp where esal>(select esal from emp where ename='Mark');
+
+
+
+Q) Write a query to display second highest salary from emp table?
+
+	select max(esal) from emp where esal<(select max(esal) from emp);	
+
+
+2) Multiple Row subquery
+---------------------
+If a sub query returns more then one row is called multiple row sub query.
+
+To perform multiple row sub query we need to use multiple row operators.
+
+We have three multiple row operators.
+
+i) ANY 
+
+ii) ALL 
+
+iii) IN 
+
+i) ANY 
+-----
+	select * from emp where esal > ANY (select esal from emp where deptno=10);
+	select * from emp where esal < ANY (select esal from emp where deptno=10);
+
+ii) ALL 
+------
+	select * from emp where esal > ALL (select esal from emp where deptno=10);
+	select * from emp where esal < ALL (select esal from emp where deptno=10);
+	
+iii) IN 
+---------
+	select * from emp where esal IN (select esal from emp where deptno=10);
+	
+
+3) Multiple Column subquery 
+--------------------------
+If a sub query returns more then one column is called multiple column subquery.
+
+ex:
+
+select * from emp where(eid,ename,esal)  IN (select eid,ename,esal from emp where eid=201);
+
+select eid,ename,esal from emp where(eid,ename,esal)  IN (select eid,ename,esal from emp where eid=201);
+
+select eid,ename,esal from emp where(eid,ename,esal)  IN (select eid,ename,esal from emp);
+
+
+Assignment
+===========
+
+Q) Write a query to display last three records from emp table?
+
+SELECT * FROM ( SELECT * FROM emp ORDER BY eid DESC) WHERE ROWNUM <= 3 order by eid;
+
+
+Q) What is the difference between RDBMS and MongoDB?
+
+RDBMS							MongoDB
+-------------						-----------
+It is a relational database.				It is a non-relational or document based database.
+
+It can't store the data in key and value pair.		It stores the data in key and value pair.
+
+Not suitable for hierarchical data storage. 		Suitable for hierarchical data storage.
+
+It has a predefined(static) schema.			It has a dynamic schema.
+
+It contains tables.					It contains collections.
+
+It is row based.					It is document based.
+
+It is column based.					It is field based.
+
+It is slower.						It is faster.
+
+It supports SQL query language.				It supports JSON query language.
+
+
+PL/SQL
+=======
+PL/SQL stands for Procedural Language extension to Structure Query Language.
+
+It is a extension of SQL and gives following features.
+
+1) We can achieve programming features like control statements ,loops and etc.
+
+2) It reduces network traffic.
+
+3) We can display custom error messages by using the concept of exception handling.
+
+4) We can perform related operations by using the concept of triggers.
+
+5) We can save the source code permanently to database for repeated execution.
+
+
+PL/SQL block
+============
+A PL/SQL program is also known as PL/SQL block.
+
+syntax:
+		DECLARE
+		-
+		- 	-- Declaration Section 
+		-
+		BEGIN
+		-
+		-	-- Execution Section
+		-
+		EXCEPTION
+		-
+		-	-- Exception Section
+		-
+		END
+		/
+
+		Here '/' is used to submit the PL/sQL block into a database.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

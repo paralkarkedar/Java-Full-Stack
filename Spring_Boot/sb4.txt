@@ -1,0 +1,283 @@
+RestController
+===============
+RestController is used to develop resful web services using @RestController annotation.
+
+@RestController annotation is a class level annotation and it allows a class to handle all the request which are made by the client.
+
+@RestController annotation in introduced in spring 4.0.
+
+@RestController annotation is a combination of two annotations i.e @Controller and @ResponseBody.
+
+We have following HTTP methods along with REST annotations.
+
+ex:
+	HTTP Method		Annotation 
+	----------		------------
+	GET			@GetMapping 		
+	POST			@PostMapping
+	PUT			@PutMapping
+	DELETE			@DeleteMapping 
+	and etc.
+
+Diagram: sb4.1
+
+
+Project Structure
+------------------
+FourthSB
+|
+|---src/main/java
+	|
+	|---com.ihub.www (base package)
+		|
+		|--FourthSBApplication.java
+	|
+	|---com.ihub.www.controller
+		|
+		|---HomeController.java
+|
+|---src/main/resources
+	|	
+	|---application.properties
+|
+|---src/test/java
+|
+|---pom.xml 
+
+step1:
+------
+	Create a spring boot starter project i.e FourthSB.
+	ex:
+		starter:	
+				Spring Web
+
+step2:
+------
+	Create a "com.ihub.www.controller" package inside "src/main/java".
+
+
+step3:
+-----
+	Create a HomeController.java file inside "com.ihub.www.controller" package.
+
+HomeController.java
+------------------
+package com.ihub.www.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/ihub")
+public class HomeController 
+{
+	@GetMapping("/home")
+	public String home()
+	{
+		return "RestController Example";
+	}
+}
+
+
+	
+step4:
+------
+	Configure server port number inside application.properties file.
+
+application.properties
+----------------------
+server.port=9090
+
+
+step5:
+------
+	Run spring boot starter project.
+
+step6:
+------
+	Test the application by using below request.
+	ex:
+		http://localhost:9090/ihub/home
+
+Q) What is the difference between @Controller and @RestController annotation?
+
+@Controller					@RestController
+-------------------				-----------------
+It is used to create spring MVC based 		It is used to create restful web services.
+web applications.
+
+It is a specialized version of @Component 	It is a specialized version of @Controller 
+annotation.					annotation.
+
+We need to use @ResponseBody annotation for 	It is a combination of @Controller and 
+every handler method.				@RestController annotation.
+
+It returns view in MVC.				It does not return view.
+
+It is add in spring 2.5 version.		It is add in spring 4.0 version.
+
+
+
+Monolithic Architecture vs Microservice Architecture
+=====================================================
+A monolithic means compose all in one place.
+
+In monolithic architecture , we will develop independent services and at the end of the development we convert to war file and deploy in a server.
+
+Advanced java follows monolithic architecture.
+
+Diagram: sb4.2
+
+Advantages:
+
+1) Simple Develop
+
+2) Simple Deploy
+
+3) Simple Test 
+
+4) Simple Scale 
+
+Disadvantages:
+
+1) Large and complex application
+
+2) Blocks contineous development
+
+3) Slow development
+
+4) It is inflexible 
+
+5) It is Inreliable 
+
+Microservice Architecture
+==========================
+Microservice Architecture
+==========================
+The microservice defines an approach to the architecture that divides an application into 
+a pool of loosely coupled services that implements business requirements. 
+
+In Microservice architecture,Each service is self contained and implements a single bussiness 
+capability.
+
+The microservice architectural style is an approach to develop a single application
+as a suite of small services. 
+
+Diagram: sb4.2
+
+Advantages:
+-----------
+
+
+1)Independent Development
+------------------------
+	Each microservice can be developed independently.
+	A single development team can build test and deploy the service.
+	
+2)Independent Deployment
+------------------------
+	we can update the service without redeploying the entire application.
+	Bug release is more managable and less risky.
+
+3)Fault Tolerance
+------------------
+	If service goes down ,It won't take entire application down with it.
+
+4)Mixed Technology Stack
+---------------------
+	It is used to pick best technology which best suitable for our application.	
+
+5)Granular Scaling
+-----------------
+	In Granular scaling ,services can scaled independently.Instead of entire application. 
+
+
+
+Project Lombok
+==============
+
+The project Lombok is a popular and widely used Java library that minimizes or removes boilerplate code. It saves both time and effort. Just by using the annotations, we can save space and improve the readability of the source code. It automatically plugs into IDEs and builds tools to spice up our Java application.
+
+It is achieved by introducing annotations that create getters, setters, constructors, equals(), hashCode(), and toString() methods-all typical Java code constructs-automatically.
+
+Download link: https://projectlombok.org/download
+
+ex:
+
+
+@Data
+@AllArgumentConstructor
+@NoArgumentConstructor
+class Product
+{
+	private int prodId;
+	private String prodName;
+	private double prodPrice;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

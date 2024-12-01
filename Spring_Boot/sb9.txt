@@ -1,0 +1,364 @@
+Spring Security 
+===============
+Spring security is a framework which provides various security features to create secure enterprise application.
+
+It is a sub project of spring framework which is developed in 2003 by Ben Alex.
+
+Late on , in 2004 it was released under the Apache licence with spring 2.0.0.
+
+It targets two major areas of our application.
+
+1) Authentication 
+-----------------
+It is a process of knowing or identifying a user.
+
+2) Autherization 
+----------------
+It is a process of giving the autherization to the user to perform actions in our application.
+
+Project Structure 
+----------------
+
+SpringSecurity
+|
+|---src/main/java
+	|
+	|---com.ihub.www
+		|
+		|---SpringSecurityApplication.java
+	|
+	|---com.ihub.www.controller
+		|		
+		|---HomeController.java
+
+|---src/main/resources
+	|		
+	|---application.properties
+
+|---src/test/java
+|
+|---pom.xml 
+
+
+step1:
+---------
+	create a spring starter project.
+	starters: spring web
+		spring security.
+
+step2:
+----------
+	create a Controller to accept the request.
+	
+HomeController.java
+--------------------------
+package com.ge.www.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HomeController {
+
+	@GetMapping("/home")
+	public String home()
+	{
+		return "Welcome to Spring Security";
+	}
+}
+
+step3:
+--------
+	Configure server port number in application.properties file.
+application.properties
+-----------------------------
+server.port=9191
+
+
+step4:
+----------
+	Run the application as spring boot application.
+
+step6:
+----------
+	Test the application by using below url.
+	ex:
+	http://localhost:9191/home
+
+Note:
+--------
+	When we hit the request ,we will get login page.
+	Default username is "user" and password we can copy from STS console.
+
+step7:
+--------
+	To change the default user and password we can use below properties in 
+	application.properties file.
+
+application.properties
+------------------------------
+server.port=9191
+
+spring.security.user.name=raja
+spring.security.user.password=rani
+
+step8:
+----------	
+	Relaunch the spring boot application.
+
+step9:
+----------
+	Test the application by using below url.
+	ex:
+	http://localhost:9191/home
+
+
+
+
+
+Project structure
+----------------
+QueryApp 
+|
+|---src/main/java
+|	|
+	|---com.ihub.www
+		|
+		|---QueryAppApplication.java
+	|
+	|---com.ihub.www.controller
+		|
+		|---UserController.java
+
+	|---com.ihub.www.service
+		|
+		|---UserService.java
+
+	|---com.ihub.www.repo
+		|
+		|---UserRepository.java (interfae)
+
+	|---com.ihub.www.model
+		|
+		|---Users.java 
+|
+|---src/main/resources
+	|
+	|---application.properties
+|
+|---src/test/java
+|
+|---pom.xml 
+
+step1:
+-------
+	Create a spring starter project i.e QueryApp.
+	ex:
+		starters:
+				Spring Web
+				Spring data JPA
+				Project lombok
+				H2 Database 
+
+application.properties
+----------------------
+server.port=9090
+
+spring.datasource.url= jdbc:h2:~/test
+spring.datasource.driverClassName= org.h2.Driver
+spring.datasource.username= sa
+spring.datasource.password= 
+
+spring.h2.console.enabled=true
+
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+spring.jpa.hibernate.ddl-auto=update 
+
+
+
+Users.java
+----------
+package com.ihub.www.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name="users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Users 
+{
+	@Id 
+	private int userId;
+	
+	@Column
+	private String userName;
+	
+	@Column
+	private String userAddress;
+}
+
+UserRepository.java
+------------------
+package com.ihub.www.repo;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.ihub.www.model.Users;
+
+@Repository
+public interface UserRepository extends JpaRepository<Users, Integer>
+{
+	@Query("SELECT u FROM Users u")
+	List<Users> findAllUsers();
+	
+	Users findByUserName(String userName);
+}
+
+
+UserService.java
+-----------------
+package com.ihub.www.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.ihub.www.model.Users;
+import com.ihub.www.repo.UserRepository;
+
+@Service
+public class UserService 
+{
+	@Autowired
+	UserRepository userRepository;
+	
+
+	public List<Users> getAllUsers()
+	{
+		return userRepository.findAllUsers();
+	}
+	
+	public Users getUser(String userName)
+	{
+		return userRepository.findByUserName(userName);
+	}
+}
+
+
+
+
+
+UserController.java
+-----------------
+package com.ihub.www.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ihub.www.model.Users;
+import com.ihub.www.service.UserService;
+
+@RestController
+@RequestMapping("/user")
+public class UserController 
+{
+		@Autowired
+		UserService userService;
+		
+		@GetMapping("/all")
+		public List<Users> getAllUsers()
+		{
+			return userService.getAllUsers();
+		}
+		
+		@GetMapping("/fetch/{userName}")
+		public Users getUser(@PathVariable String userName)
+		{
+			return userService.getUser(userName);
+		}
+
+}
+
+Request url
+------------
+	http://localhost:9090/h2-console (First insert the data)
+	http://localhost:9090/user/all 
+	http://localhost:9090/user/fetch/Alan
+	
+
+
+
+
+
+Q) What is the difference between application.properties and application.yml?
+
+application.properties 				application.yml
+----------------------				------------------
+It follows non-hierarchical structure. 		It follows hierarchical structure.
+
+We can configure only one spring profile. 	We can configure multiple spring profiles.
+
+It is primarily used in java. 			It is used in many languages like Java,
+						python, Ruby and etc.
+
+Supports key/val, but doesn’t support		Supports key/val, basically map, List and
+values beyond the string.			scalar types (int, string etc.)
+
+
+
+Q) What is the difference between Spring Bean and POJO class?
+
+Spring Bean 					POJO
+--------------					--------
+An object that is managed by the spring IoC	An object that is managed by the user is
+container is called spring bean.		called pojo. Any java object is a pojo.
+
+
+Spring beans can be inject to other beans	POJOs are not managed by the spring so
+using dependency injection mechanism.		they are not eligible for automatic
+						dependency injection mechanism.
+
+Spring beans have restrictions. 		POJOs don't have restrictions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

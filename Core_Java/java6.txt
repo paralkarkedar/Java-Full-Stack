@@ -1,0 +1,154 @@
+History of Java
+================
+In 1990 , Sun Micro System took one project to develop a software called consumer electronic device which can be controlled by a remote like setup box.That time project was called Stealth project and later it is renamed to Green project.
+
+James Gosling, Mike Sheradin and Patrick Naughton were there to develop the project. They met in a place called Aspan/Colarado to start the work with Graphic System.James Gosling thought to use C and C++ languages to develop the project.But the problem what they have faced is C and C++ languages are system dependent. Then James Gosling decided why don't we create our own programming language which i system independent.
+
+In 1991, they have developed a programming language called an OAK. OAK means strength, itself is a coffee seed name and it is a national three for many countries like Germany, France, USA and etc.
+
+Later in 1995, they have renamed OAK to Java. Java is a island of an Indonasia where first coffee of seed was produced and during the development of project they were consuming lot of coffee's.Hence a symbol of java is a cup of coffee with saucer.
+
+Interview Questions
+--------------------
+Q) Who is the creator of java?
+
+	James Gosling 
+
+
+Q) In which year java was developed?
+
+	In 1995
+
+
+Q) Java originally known as ___ ?
+
+	OAK
+
+
+
+Java Source File Structure 
+===========================
+case1:
+------
+	A java program can have mulitiple classes.
+
+
+case2:
+------
+	If a java program contains multiple classes then we need to check which class contains 
+	main method and that class treated as main class.
+	ex:
+		Test.java
+		-----------
+		class A 
+		{
+			//some logic
+		}
+		class Test
+		{
+			public static void main(String[] args)
+			{
+				//some logic
+			}	
+		}
+
+case3:
+------
+	If a java program contains multiple classes with main method then we need to declare 
+	one class as public.That public class will treated as main class.
+
+	ex:
+		A.java
+		--------		
+		public class A
+		{
+			public static void main(String[] args)
+			{
+				System.out.println("A-class");	
+			}	
+		}
+		class B
+		{
+			public static void main(String[] args)
+			{
+				System.out.println("B-class");	
+			}	
+		}
+		class C
+		{
+			public static void main(String[] args)
+			{
+				System.out.println("B-class");	
+			}	
+		}
+		We can compile above program with below command.
+		ex:
+			javac   A.java  (Here A.class, B.class and C.class file will be created)
+
+		We can run above program with below commands.
+		ex:
+			java   A  (A class will execute)					
+			java   B  (B class will execute)
+			java   C  (C class will execute)
+
+
+Diagram: java6.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

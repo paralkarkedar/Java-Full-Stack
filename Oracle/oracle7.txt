@@ -1,0 +1,311 @@
+Index
+======
+Index is an object which is used to improve the performance of select statement.
+
+Index is a database is similar to index in a book.
+
+Index can be created only to those columns which are widely used in where clause.
+
+When we create index, two columns will be generated i.e One is ROWID and second is indexed column
+
+All records will store in ascending in a indexed column.
+
+ex:			
+				INDEX TABLE
+		--------------------------------------
+		ROWID			INDEXED COLUMN
+		--------------------------------------
+		-		|	9000		
+		-		|	19000
+		-		|	23000
+		-		|	27000
+		-		|	31000
+		-		|	37000
+		-		|	42000
+		---------------------------------------
+
+We have two types of indexes.
+
+1) Simple index 
+
+2) Complex index 
+
+1) Simple index 
+----------------
+If index is created only for one column is called simple index.
+
+ex:
+	create index idx1 on emp(esal);
+
+	Here index is used if we use esal in where condition.
+	ex:
+		select * from emp where esal=27000;
+
+
+2) Complex index 
+-----------------
+If index is created for multiple columns is called complex index.
+
+ex:
+	create index idx2 on emp(eid,deptno);
+
+	Here index is used if we use eid and deptno in where condition.
+
+	ex:
+		select * from emp where eid=201 and deptno=10;
+
+
+Q) Write a query to display list of indexes present in database?
+
+	select index_name from user_indexes;
+
+
+Q) Write a query to drop the index?
+
+	drop index idx1;
+	drop index idx2;
+
+
+Q) What is the difference between ROWNUM and ROWID?
+
+ROWNUM
+------
+ROWNUM value starts with '1' and it is increment by 1.
+
+ROWNUM values are temperory.
+
+ex:
+		select eid,ename,esal from emp;
+
+		select rownum,eid,ename,esal from emp;
+
+		select rownum,deptno,dname,dloc from dept;
+
+ROWID
+------
+ROWID is a memory address where our records will store in a database.
+
+ROWID is permanent.
+
+ex:
+		select rowid,rownum,eid,ename,esal from emp;
+
+		select rowid,rownum,deptno,dname,dloc from dept;
+
+
+Q) Write a query to display first three records from employee table?
+
+	select * from emp where rownum<=3;	
+
+
+Q) Write a query to display 4th record from employee table?
+
+	select * from emp where rownum<=4
+	minus
+	select * from emp where rownum<=3;
+
+
+Q) Write a query to display 5th record from employee table?
+
+	select * from emp where rownum<=5
+	minus
+	select * from emp where rownum<=4;
+
+
+Synonyms
+========
+Alternate name given to a table is called synonym.
+
+It provides an alternative name for another database object, referred to as the base object, that can exist on a local or remote server.
+
+syntax:
+------
+	create synonym <synonym_name> for <table_name>;
+
+ex:
+	create synonym sy1 for emp;
+
+We can use synonym instead of table name for all commands.
+
+ex:
+	select * from sy1;
+
+	delete from sy1;
+
+	select * from emp; // no rows selected
+
+	rollback;
+
+
+Q) Write a query to display list of synonyms present in database?
+
+	select synonym_name from user_synonyms;
+
+
+Q) Write a query to drop the synonym?
+
+	drop synonym  sy1;
+
+
+
+Views
+=====
+View is a virtual representation of a data from one or more then one table.
+
+A table which is used to create a view is called base table or above table.
+
+View does not consumes memory because it does not contain data.
+
+View gets the data from base table when we run select command.
+
+We have following list of views.
+
+1) Simple view 
+
+2) Complex view 
+
+3) With read only view
+
+4) With check option view 
+
+5) Materialized view 
+
+1) Simple view 
+--------------
+If a view is created by using one base table is called simple view.
+
+ex:
+	create view v1 as select * from emp;
+
+	select * from v1; // 7 records 
+
+DML operations are allowed in simple view.
+ex:
+	delete from v1;
+
+	select * from v1; //no rows selected
+
+	select * from emp; // no rows selected
+
+
+2) Complex view 
+---------------
+If a view is created by using more then one table is called complex view.
+
+ex:
+	create view v2 as select e.eid,e.ename,e.esal,d.dname,d.dloc from emp e,dept d;
+
+DML operations are not allowed for complex view.
+
+ex:
+	delete from v2;  // cannot delete from view 
+
+
+
+3) With read only view
+--------------------
+If a view is created by using one base table and DML operations are not required then we need to use 
+with read only view.
+
+ex:
+
+	create view v3 as select * from emp with read only;
+
+	select * from v3; // 7 records 
+
+	delete from v3;  //cannot delete from view 
+	
+
+4) With check option view 
+---------------------
+If a view is created by using one base table and DML operations are allowed only when condition is true then 
+we need to use with check option view.
+
+ex:
+	create view v4 as select * from emp where deptno=30 with check option;
+
+	select * from v4;
+
+	insert into v4 values(207,'Lara',40000,40,'Salesman',200); // view WITH CHECK OPTION
+
+	insert into v4 values(207,'Lara',40000,30,'Salesman',200);	
+		
+	select * from v4;
+	
+	select * from emp;
+
+
+5) Materialized view 
+--------------------
+Materialized view is also known as snapshot.
+
+We can create materialized view when table have primary key or unique key.
+
+ex:
+	alter table emp ADD primary key(eid);
+
+	create materialized view v5 as select * from emp;
+
+	select * from v5; // 7 records 
+
+	select * from emp; // 7 records
+	
+	delete from emp where eid=207;
+
+	commit;
+
+	select * from emp; // 6 records 
+
+	select * from v5; // 7 records 
+
+We need to refresh the materialized view.
+ex:
+	exec  DBMS_SNAPSHOT.REFRESH('V5');
+
+	select * from v5; // 6 records 
+
+
+Q) Write a query to see the list of views present in a database?
+
+	select view_name from user_views;
+
+
+Q) Write a query to drop the view?
+
+	drop view v1;
+	drop view v2;
+	drop view v3;
+	drop view v4;
+	drop materialized view v5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

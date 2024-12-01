@@ -1,0 +1,513 @@
+To see the output in PL/SQL we need to use below command.
+ex:
+	SQL> set serveroutput on 
+
+LOOPS
+======
+We have three types of loops in PL/SQL.
+
+1) Simple loop 
+
+2) while loop 
+
+3) for loop 
+
+1) Simple loop 
+-----------
+It evaluates the code how long our condition is true.
+
+ex:
+	DECLARE 
+	A number:=1;
+	BEGIN
+
+	DBMS_OUTPUT.PUT_LINE('Welcome');
+
+	LOOP
+	DBMS_OUTPUT.PUT_LINE('Hello');
+	EXIT WHEN A=4;
+	A:=A+1;
+	END LOOP;
+
+	DBMS_OUTPUT.PUT_LINE('Thank you');
+	
+	END;
+	/
+
+ex:
+---
+	DECLARE 
+	A number:=1;
+	BEGIN
+
+	LOOP
+	DBMS_OUTPUT.PUT_LINE(A);
+	EXIT WHEN A=10;
+	A:=A+1;
+	END LOOP;
+
+	END;
+	/
+
+2) while loop 
+--------------
+It will evaluate the code how long our condition is true.
+
+ex:
+	DECLARE
+	A number:=1;
+	BEGIN
+
+	DBMS_OUTPUT.PUT_LINE('Welcome');
+
+	WHILE A<=4 LOOP
+	DBMS_OUTPUT.PUT_LINE('Hello');
+	A:=A+1;
+	END LOOP;
+
+	DBMS_OUTPUT.PUT_LINE('Thankyou');
+
+	END;
+	/
+
+
+Q) Write a PL/SQL program to print 1 to 10 numbers in descending order?
+
+
+	DECLARE
+	A number:=10;
+	BEGIN
+	WHILE A>=1 LOOP
+	DBMS_OUTPUT.PUT_LINE(A);
+	A:=A-1;
+	END LOOP;
+	END;
+	/
+
+
+3) for loop 
+----------
+It evaluates the code how long our condition is true.
+
+ex:
+	DECLARE 
+	A number;
+	BEGIN
+
+	DBMS_OUTPUT.PUT_LINE('Welcome');
+	
+	FOR A IN 1 .. 4 LOOP
+	DBMS_OUTPUT.PUT_LINE('Hello');
+	END LOOP;
+
+	DBMS_OUTPUT.PUT_LINE('Thankyou');
+
+	END;
+	/
+		
+	
+Q) Write a PL/SQL program to perform multiplication table of a given number?
+
+	DECLARE 
+	N number;
+	A number;
+	BEGIN
+	N:=&no;
+	
+	FOR A IN 1 .. 10 LOOP
+	DBMS_OUTPUT.PUT_LINE(N||' * '||A||' = '||N*A);
+	END LOOP;
+
+	END;
+	/
+
+Exceptions
+===========
+Runtime errors are called exceptions.
+
+We have two types of exceptions.
+
+1) Predefined exceptions 
+
+2) Userdefined exceptions 
+
+1) Predefined exceptions 
+------------------------
+We have following list of predefined exceptions.
+
+i) NO_DATA_FOUND Exception 
+
+ii) TOO_MANY_ROWS Exception 
+
+iii) ZERO_DIVIDE Exception 
+
+iv) VALUE_ERROR Exception 
+
+v) DUP_VAL_ON_INDEX Exception 
+
+vi) OTHERS 
+
+
+i) NO_DATA_FOUND Exception 
+--------------------------
+This exception will raise when select statement does not return any record.
+
+ex:
+	DECLARE 
+	L_Ename emp.ename%TYPE;
+	BEGIN
+	select ename into L_Ename from emp where eid=209;
+	DBMS_OUTPUT.PUT_LINE(L_Ename);
+	EXCEPTION 
+	WHEN NO_DATA_FOUND THEN 
+	DBMS_OUTPUT.PUT_LINE('Please check employee Id');
+	END;
+	/
+		
+ii) TOO_MANY_ROWS Exception 
+----------------------------
+This exception will raise when select statement returns more then one row.
+
+ex:
+	DECLARE 
+	L_Ename emp.ename%TYPE;
+	BEGIN
+	select ename into L_Ename from emp where deptno=20;
+	DBMS_OUTPUT.PUT_LINE(L_Ename);
+	EXCEPTION 
+	WHEN TOO_MANY_ROWS THEN 
+	DBMS_OUTPUT.PUT_LINE('select statement returns multiple rows');
+	END;
+	/
+
+
+iii) ZERO_DIVIDE Exception 
+---------------------------
+This exception will raise when are try to divide a number with zero.
+
+ex:
+	DECLARE 
+	A number;
+	BEGIN
+	A:=10/0;
+	DBMS_OUTPUT.PUT_LINE(A);
+	EXCEPTION 
+	WHEN ZERO_DIVIDE THEN 
+	DBMS_OUTPUT.PUT_LINE('Dont divide by zero');
+	END;
+	/
+
+iv) VALUE_ERROR Exception
+------------------------
+This exception will raise when there is a mismatch with datatype or size.
+
+ex:
+	DECLARE 
+	A number(3);
+	BEGIN
+	A:=12345;
+	DBMS_OUTPUT.PUT_LINE(A);
+	EXCEPTION
+	WHEN VALUE_ERROR THEN 
+	DBMS_OUTPUT.PUT_LINE('Please check the size');
+	END;
+	/
+
+ex:
+	DECLARE 
+	L_Esal   emp.esal%TYPE;
+	BEGIN
+	select ename into L_Esal from emp where eid=207;
+	DBMS_OUTPUT.PUT_LINE(L_Esal);
+	EXCEPTION 
+	WHEN VALUE_ERROR THEN 
+	DBMS_OUTPUT.PUT_LINE('Please check datatype');
+	END;
+	/
+
+
+
+v) DUP_VAL_ON_INDEX Exception 
+------------------------------
+This exception will raise when we are trying to insert duplicate value in a primary key.
+
+ex:
+	alter table emp add primary key (eid);
+
+	BEGIN
+	insert into emp values(207,'Ana',47000,60,'Salesman',800);
+	DBMS_OUTPUT.PUT_LINE('Thank you for inserting');
+	EXCEPTION 
+	WHEN DUP_VAL_ON_INDEX THEN 
+	DBMS_OUTPUT.PUT_LINE('Please check the employee id ');
+	END;
+	/
+		
+vi) OTHERS 
+----------
+It is a universal angular exception which is used to handle all types of exceptions.
+
+ex:
+	DECLARE 
+	L_Ename emp.ename%TYPE;
+	BEGIN
+	select ename into L_Ename from emp where eid=209;
+	DBMS_OUTPUT.PUT_LINE(L_Ename);
+	EXCEPTION 
+	WHEN OTHERS THEN 
+	DBMS_OUTPUT.PUT_LINE('Please check employee Id');
+	END;
+	/
+
+
+2) Userdefined exceptions
+-------------------------
+Exceptions which are created by the user based on the application requirements are called custom exceptions.
+
+
+Steps to work with userdefine exceptions.
+-----------------------------------------
+step1:
+		Declare the exception 
+		ex:
+			<Exception_Name> EXCEPTION;
+
+step2:
+		Raise the exception 
+		ex:	
+			RAISE <Exception_Name>;
+
+step3:
+		Handle the exception 
+		ex:
+			WHEN <Exception_name> THEN 
+
+ex:
+----
+	DECLARE 
+	A number:=5000;
+	MY_EX1 Exception;
+	BEGIN
+
+	IF A>2000 THEN 
+	RAISE MY_EX1;
+	END IF;
+	DBMS_OUTPUT.PUT_LINE(A);
+
+	EXCEPTION
+	WHEN MY_EX1 THEN 
+	DBMS_OUTPUT.PUT_LINE('Number is too large');
+	END;
+	/
+	
+
+ex:
+----
+	DECLARE 
+	A number:=1000;
+	MY_EX1 Exception;
+	BEGIN
+
+	IF A>2000 THEN 
+	RAISE MY_EX1;
+	END IF;
+	DBMS_OUTPUT.PUT_LINE(A);
+
+	EXCEPTION
+	WHEN MY_EX1 THEN 
+	DBMS_OUTPUT.PUT_LINE('Number is too large');
+	END;
+	/
+	
+Cursors
+=======
+Cursor is a PL/SQL block which is used to run SQL commands.
+
+We have two types of cursors.
+
+1) Implicit cursor
+
+2) Explicit cursor 
+
+1) Implicit cursor
+--------------------
+All the activities related to cursor like opening the cursor, processing the cursor and closing the cursor 
+which is done automatically is called implicit cursor.
+
+We have four types of implicit cursor attributes.
+
+i) SQL%ISOPEN 
+--------------
+	It is a boolean attribute which returns always false.
+
+ii) SQL%FOUND 
+------------
+	It is a boolean attribute which returns true if SQL command is success and returns false if 
+	SQL command is failed.
+
+iii) SQL%NOTFOUND 
+------------------
+	It is completely inverse of SQL%FOUND.
+
+	It is a boolean attribute which returns false if SQL command is success and returns true if 
+	SQL command is failed.
+
+
+iv) SQL%ROWCOUNT 
+---------------
+	It will return number of records effecting in a database table.
+
+
+ex:
+---
+	BEGIN
+	IF SQL%ISOPEN THEN 
+	DBMS_OUTPUT.PUT_LINE('TRUE');
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('FALSE');
+	END IF;
+	END;
+	/
+
+ex:
+---
+	BEGIN
+	update student set sname='Jack' where sno=101;
+	IF SQL%FOUND THEN 
+	DBMS_OUTPUT.PUT_LINE('Record Updated');
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('Record Not Updated');
+	END IF;
+	END;
+	/
+
+ex:
+---
+	BEGIN
+	update student set sname='Jack' where sno=106;
+	IF SQL%FOUND THEN 
+	DBMS_OUTPUT.PUT_LINE('Record Updated');
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('Record Not Updated');
+	END IF;
+	END;
+	/
+
+
+ex:
+---
+	BEGIN
+	update student set sname='Jack' where sno=106;
+	IF SQL%NOTFOUND THEN 
+	DBMS_OUTPUT.PUT_LINE('Record Updated');
+	ELSE
+	DBMS_OUTPUT.PUT_LINE('Record Not Updated');
+	END IF;
+	END;
+	/
+
+ex:
+----
+	BEGIN
+	delete from student;
+	DBMS_OUTPUT.PUT_LINE(SQL%ROWCOUNT||' Records Deleted');
+	END;
+	/
+
+
+2) Explicit cursor 
+-------------------
+All the activities related to cursor like opening the cursor, processing the cursor and closing the cursor which is done by a programmer is called explicit cursor.
+
+We need to use explicit cursor when select statement returns more then one row.
+
+We have following list of explicit cursor attributes.
+
+
+i) %ISOPEN 
+--------------
+	It is a boolean attribute which returns true if cursor is open and returns false if cursor is closed.
+
+ii) %FOUND 
+------------
+	It is a boolean attribute which returns true if SQL command is success and returns false if 
+	SQL command is failed.
+
+iii) %NOTFOUND 
+------------------
+	It is completely inverse of SQL%FOUND.
+
+	It is a boolean attribute which returns false if SQL command is success and returns true if 
+	SQL command is failed.
+
+
+iv) %ROWCOUNT 
+---------------
+	It will return number of records effecting in a database table.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

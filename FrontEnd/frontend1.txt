@@ -1,0 +1,307 @@
+HTML5
+======
+HTML stands for Hypertext Markup Language.
+
+It is widely used language on web to develop web pages and web applications.
+
+It is developed by Burner's Lee in late 1991.
+
+It is a tag based language.
+
+It is case insensitive language.
+
+HTML tags having opening tag and closing tag.
+ex:
+	<html>  -- opening tag 
+
+	</html> -- closing tag 
+
+HTML tags may contains attributes and each attribute contains attribute name and attribute value.
+ex:
+	<body bgcolor="red">
+
+HTML tag may contains multiple attributes but each attribute seperated with space.
+ex:
+	<body bgcolor="color-name"  background="image-name">
+
+All HTML documents we need to save with .html or .htm extension.
+
+HTML documents execute in a browser window.
+ex:
+	Chrome 
+	Mozilla
+	Edge
+	IE
+	Opera
+	and etc.
+
+We will use following editors to create HTML documents.
+ex:
+	Notepad 
+	Notepad++
+	Sublime 
+	Atom 
+	VSC 
+	DreamViewer
+	and etc.
+
+HTML is used to develop client side components.
+
+HTML 2.0 specification was released in the year of 1995.
+
+HTML 4.0 specification was released in the year of 1999.
+
+HTML5 which is a extension of HTML4.0 was released in the year of 2005.
+
+The main objective of HTML5 is used to develop light weight components.
+
+HTML5 is also known as Advanced Hypertext Markup Language.
+
+
+HTML skeleton
+=============
+<!DOCTYPE html>
+<html>
+	<head>
+		-
+		-  head related tags 
+		-
+	</head>
+	<body>
+		-
+		- body related tags 
+		-
+	</body>
+</html>
+
+Note:
+-----
+A <!DOCTYPE html> represent it is a HTML5 document.
+
+<html> tag 
+----------
+	It is a root tag for entire HTML document.
+	It contains two child tags.
+	1) <head> tag 
+	2) <body> tag 
+
+<head> tag 
+------------
+	We can declare following things inside <head> tag.
+	ex:
+		1) Title of a page 
+		2) FavIcon of a page 
+		3) MetaData 
+		4) Styles
+		5) Scripts 
+
+<body> tag 
+-----------
+	It contains actual content of a web page.
+ex:1
+----
+
+<!DOCTYPE html>
+<html>
+	<head>
+	
+	</head>
+	<body>
+		Welcome to HTML Class
+	</body>	
+</html>
+
+ex: 2
+----
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>QualityThought</title>
+	</head>
+	<body>
+		Welcome to HTML Class
+	</body>	
+</html>
+
+ex: 3
+-------
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>QualityThought</title>
+
+		<link rel="icon" href="file.png">
+	</head>
+	<body>
+		Welcome to HTML Class
+	</body>	
+</html>
+
+ex: 4
+-----
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- page title  --> 
+		<title>QualityThought</title>
+
+		<!-- favicon --> 
+		<link rel="icon" href="file.png">
+	</head>
+	<body>
+		<!-- custom msg -->
+		Welcome to HTML Class
+	</body>	
+</html>	
+
+ex:5
+----
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- page title  --> 
+		<title>QualityThought</title>
+
+		<!-- favicon --> 
+		<link rel="icon" href="file.png">
+	</head>
+	<body bgcolor="cyan">
+		<!-- custom msg -->
+		Welcome to HTML Class
+	</body>	
+</html>
+
+ex:6
+-----
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- page title  --> 
+		<title>QualityThought</title>
+
+		<!-- favicon --> 
+		<link rel="icon" href="file.png">
+	</head>
+	<body background="bg.png">
+		<!-- custom msg -->
+		Welcome to HTML Class
+	</body>	
+</html>
+
+
+<meta> tag 
+===========
+It is used to declare metadata of a document.
+
+MetaData used by search engine, browser and other webservices.
+
+To declare a metadata of a document we need to use <meta> tag.
+
+A <meta> tag must declare inside <head> tag.
+
+We can use <meta> tag to declare following things.
+
+1) Description 
+
+2) Author 
+
+3) Keywords 
+
+4) Viewport 
+
+5) Refresh 
+
+6) copyright 
+
+and etc.
+
+
+UTF-8
+------
+It is a unicode transformation format.
+
+It is a encoding method that describes what character set a website is written with.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- metadata -->
+		<meta charset="UTF-8">	
+		<meta name="description" content="It is a training class">
+		<meta name="author" content="niyaz sir">
+		<meta name="keywords" content="HTML,CSS,JavaScript,Bootstrap">
+		<meta name="copyright" content="copyright by niyaz sir">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta http-equiv="refresh" content="05">
+	</head>
+	<body>
+		Hello Bro What are you doing
+	</body>	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

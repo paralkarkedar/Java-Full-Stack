@@ -1,0 +1,316 @@
+Every JDBC application is a two-tier application. Java with JDBC code acts like a frontend/tier1/layer1 and database software acts like a backend/tier2/layer2.
+
+The one which is visible to the enduser to perform some operations is called frontend.
+
+The one which is not visible to the enduser but it performs operations based on the instructions given by frontend is called backend.
+
+Enduser is a non-technical person. He can't prepare and execute SQL query in database software. He depends upon frontend developers having the capability to do that work for them.
+
+Diagram: jdbc2.1	
+
+
+JDBC Driver
+============
+JDBC Driver acts like a bridge between java application and database software.
+
+It is used to convert java calls to database calls and vice versa.
+
+Here calls means instructions.
+
+Diagram: jdbc2.2
+
+
+ODBC Driver
+===========
+VBScript,D2K,Perl and etc uses ODBC driver to locate and interact with database software. 
+
+Diagram: jdbc2.3
+
+
+ODBC drivers developed in C language by taking the support of pointers and Java does not support pointers.To overcome this limitation Sun Micro System introduced JDBC Drivers exclusively.
+
+We will get JDBC softwares from following parties.
+
+1) Sun Micro System (creator of JDBC Driver)
+
+2) Database vendor 
+
+3) Third party vendor 
+
+We will get ODBC softwares from following parties.
+
+1) Xopen company (creator of ODBC driver)
+
+2) Database vendor 
+
+3) Third party vendor 
+
+
+Q) What is JDBC?
+
+JDBC is a open technology given by Sun Micro System having set of rules and guidelines to develop JDBC drivers to interact with multiple database softwares.
+
+
+q) What is ODBC?
+
+ODBC is a open technology given by Xopen company having set of rules and guidelines to develop ODBC drivers to interact with multiple database softwares.
+
+
+Q) How many drivers are there in JDBC?
+
+We have four types of JDBC drivers.
+
+1) Type1 JDBC Driver / JDBC-ODBC Bridge Driver 
+
+2) Type2 JDBC Driver / Native API Driver 
+
+3) Type3 JDBC Driver / Net Protocol Driver 
+
+4) Type4 JDBC Driver / Native Protocol Driver 
+
+To use any JDBC driver we need to register with DriverManager service.
+
+Every JDBC application contains one built in service called DriverManager service.
+
+
+Class.forName()
+================
+It is always recommanded to use Class.forName() method to register JDBC Driver with DriverManager service.
+
+A Class.forName() method is used to load driver class but it won't create an object.
+
+ex:
+	Class.forName("Driver-Class-Name");
+
+Connection object
+=================
+Connection is an interface which is present in java.sql package.
+
+It is an object of underlying supplied java class which implements java.sql.Connection interface.
+
+To interact with database software we need to establish the connection with database software.
+
+syntax:
+	Connection con;
+
+
+DriverManager.getConnection()
+=============================
+DriverManager is a class which is present in java.sql package.
+
+A DriverManager.getConnection() is used to interact with database software and gets one JDBC connection object representing connectivity between java application and database software.
+
+ex:
+	Connection con=DriverManager.getConnection("driver-url");
+
+
+Statement object
+===============
+Statement is an interface which is present in java.sql package.
+
+It is an object of underlying supplied java class which implements java.sql.Statement interface.
+
+It acts like a vehicle between java application and database software.
+
+It is used to sends and executes SQL query in database software.
+
+ex:
+	Statement st=con.createStatement();
+
+
+
+ResultSet object
+===================
+ResultSet is an interface which is present in java.sql package.
+
+It contains two positions.
+
+1) BFR (Before First Record/Row)
+2) ALR (After Last Record/Row)
+
+By default record pointer points BFR position.
+
+rs.next()
+=========
+It is used to move record pointer to next position from current position. If next position is a record then it will return. If next position is ALR then it will return false.
+
+Every record ResultSet having 1 as base index and every column of record ResultSet having 1 as base index.
+
+We can read the values from record ResultSet by using getXxx() methods with index numbers or column name.
+
+Here getXxx() method means getInt(), getString(), getFloat(), getDouble() and etc.
+
+Diagram: jdbc2.4
+
+
+Types of queries in JDBC
+==========================
+According to JDBC point of view we have two types of queries.
+
+1) Select query 
+
+2) Non-Select query 
+
+1) Select query 
+------------------
+A select query returns bunch of records from database.
+
+ex:
+	select * from student;
+
+JDBC Statement object gave executeQuery() method to execute selecte query.
+ex:
+	ResultSet rs=st.exectueQuery("select * from student");
+
+
+2) Non-Select query 
+--------------------
+A non-select query returns numeric value representing number of records effecting in a database table.
+
+ex:
+	delete from student; 
+
+JDBC Statement object gave executeUpdate() method to execute non-select query.
+ex:
+	int result=st.executeUpdate("delete from student");
+
+
+
+Type4 JDBC Driver
+===================
+			package-name 
+		    ------------------
+				|
+1) Driver class :   oracle.jdbc.driver.OracleDriver
+					-----------			
+						|
+					driver-classname
+
+						logical database name 
+						  |
+2) Driver url :  jdbc:oracle:thin:@localhost:1521:XE 
+		------------------  |        |
+		sub-protocol    hostname     portno 
+
+3) Database username : system 
+
+4) Database password : admin 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,486 @@
+Generics
+========
+Arrays are typesafe. 
+
+It means we can give guarantee that what type of elements are present in array.
+
+Ex:
+	int[] arr=new int[3];
+	arr[0]=10;
+	arr[1]=20;
+	arr[2]=30;
+
+If requirement is there to store String values then it is recommanded to use String[] array.
+ex:
+	String[] sarr=new String[3];
+	sarr[0]="hi";
+	sarr[1]="bye";
+	sarr[2]=10;  //invalid  
+
+At the time of retrieving the data from array we don't need to perform typecasting.
+
+ex:
+	
+	String[] sarr=new String[3];
+	sarr[0]="hi";
+	sarr[1]="bye";
+	-
+	-
+	String val=sarr[0];
+
+
+Collections are not typesafe.
+
+It means we can't provide guarantee that what type of elements are present in Collections.
+
+If requirement is there to store String values then it is never recommanded to use ArrayList because 
+we won't get any compile time error or runtime error but sometimes our program get failures.
+
+ex:
+	ArrayList al=new ArrayList();
+	al.add("Hi");
+	al.add("Bye");
+	al.add(10);
+
+At the time of retrieving the data compulsary we need to perform typecasting.
+
+ex:
+	ArrayList al=new ArrayList();
+	al.add("Hi");
+	al.add("Bye");
+	al.add(10);
+	-
+	-
+	String val=(String)al.get(0);
+
+To overcome this above limitations Sun Micro System introduced Generics concept in 1.5v.
+
+The main objective of Generics are 
+
+1) To make Collections as typesafe.
+
+2) To avoid typecasting problem.
+	
+
+java.util package
+==================
+	
+Q) What is the difference between Arrays and Collections?
+
+Arrays						Collections
+---------					------------
+It is a collection of homogeneous data 		It is a collection of homogeneous and hetrogeneous data 
+elements.					elements.
+
+It is fixed in size.				It is growable in nature.
+
+Performance point of view arrays are 		Memory point of view Collections are recommanded to use.
+recommanded to use.	
+
+It can hold primitive types and object types.	It holds only object types.
+
+It is not implemented based on data structure 	It is implemented based on data structure concept.Hence
+concept.Hence we can't expect any readymade 	we can expect readymade methods.
+methods.
+
+
+Collection Framework
+=====================
+It defines several utility classes and interfaces to represent group of objects in a single entity.
+
+ex:
+		Language		Collections 
+		----------		----------------------
+		C++			Standard Template Library (STL)
+		Java			Collection Framework
+
+
+Collection
+===========
+It is an interface which is present in java.util package.
+
+It is a root interface for entire Collection framework.
+
+If we want to represent group of individual objects in a single entity then we need to use Collection.
+
+Collection interface contains following methods which are available for entire Collection objects.
+
+ex:
+	cmd>  javap   java.util.Collection 
+ex:
+	public abstract int size();
+  	public abstract boolean isEmpty();
+  	public abstract boolean contains(java.lang.Object);
+  	public abstract <T> T[] toArray(T[]);
+  	public abstract boolean add(E);
+  	public abstract boolean remove(java.lang.Object);
+  	public abstract boolean containsAll(java.util.Collection<?>);
+  	public abstract boolean addAll(java.util.Collection<? extends E>);
+  	public abstract boolean removeAll(java.util.Collection<?>);
+  	public default boolean removeIf(java.util.function.Predicate<? super E>);
+  	public abstract boolean retainAll(java.util.Collection<?>);
+  	public abstract void clear();
+  	public abstract boolean equals(java.lang.Object);
+  	public abstract int hashCode();
+	and etc.
+
+
+List
+=======
+It is a child interface of Collection interface.
+
+If we want to represent group of individual objects in a single entity where duplicates are allowed and order is preserved then we need to use List interface.
+
+Diagram: java39.1
+
+
+ArrayList
+==========
+The underlying data structure is resizable array or growable array.
+
+Duplicate objects are allowed.
+
+Insertion order is preserved.
+
+Hetrogeneous objects are allowed.
+
+Null insertion is possible.
+
+It implements Serializable, Cloneable and RandomAccess interface.
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		ArrayList al=new ArrayList();
+		al.add("one");
+		al.add("two");
+		al.add("three");
+		System.out.println(al); //[one,two,three]
+		
+		al.add("one");
+		System.out.println(al);//[one,two,three,one]
+		
+		al.add(10);
+		System.out.println(al);//[one,two,three,one,10]
+		
+		al.add(null);
+		System.out.println(al);//[one,two,three,one,10,null]
+	}
+}
+
+ex:
+--
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<String> al=new ArrayList<String>();
+		al.add("one");
+		al.add("two");
+		al.add("three");
+		System.out.println(al); //[one,two,three]
+		
+		al.add("one");
+		System.out.println(al);//[one,two,three,one]
+		
+		al.add(null);
+		System.out.println(al);//[one,two,three,one,null]
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<String> al=new ArrayList<String>();
+		al.add("one");
+		al.add("two");
+		al.add("three");
+		
+		for(String s:al)
+		{
+			System.out.print(s+" ");
+		}
+	}
+}
+
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<String> al=new ArrayList<String>();
+		al.add("one");
+		al.add("two");
+		al.add("three");
+		
+		for(int i=0;i<al.size();i++)
+		{
+			System.out.print(al.get(i)+" ");
+		}
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<String> al=new ArrayList<String>();
+		al.add("one");
+		al.add("two");
+		al.add("three");
+		
+		al.add(1,"gogo");
+		System.out.println(al);//[one, gogo, two, three]
+		
+		al.remove("gogo");
+		System.out.println(al); // [one, two, three]
+		
+		System.out.println(al.contains("gogo")); // false
+		
+		al.clear();
+		System.out.println(al);//[]
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		List<String> list=new ArrayList<String>();
+		list.add("one");
+		list.add("two");
+		list.add("three");
+		System.out.println(list);//[one,two,three]
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		List<String> list=Arrays.asList("six","four","two");
+
+		System.out.println(list);//[six,four,two]
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		List<Integer> list=Arrays.asList(10,20,30);
+
+		System.out.println(list);//[10,20,30]
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		List<String> javaCrs=new ArrayList<String>();
+		javaCrs.add("core");
+		javaCrs.add("advanced");
+		javaCrs.add("html");
+		javaCrs.add("css");
+		javaCrs.add("react");
+		
+		List<String> pythonCrs=new ArrayList<String>();
+		pythonCrs.add("core");
+		pythonCrs.add("dango");
+		pythonCrs.add("html");
+		pythonCrs.add("css");
+		pythonCrs.add("angular");
+		
+		javaCrs.retainAll(pythonCrs);
+		
+		System.out.println(javaCrs);
+		
+	}
+}
+
+
+LinkedList
+==========
+The underlying data structure is doubly LinkedList.
+
+Duplicate objects are allowed.
+
+Insertion order is preserved.
+
+Hetrogeneous objects are allowed.
+
+Null insertion is possible.
+
+It implements Serializable, Cloneable and Deque interface.
+
+LinkedList contains following methods.
+
+ex:
+	public E getFirst();
+  	public E getLast();
+  	public E removeFirst();
+ 	public E removeLast();
+  	public void addFirst(E);
+  	public void addLast(E);	
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		LinkedList ll=new LinkedList();
+		ll.add("one");
+		ll.add("two");
+		ll.add("three");
+		System.out.println(ll);//[one,two,three]
+		
+		ll.add("one");
+		System.out.println(ll);//[one,two,three,one]
+		
+		ll.add(10);
+		System.out.println(ll);//[one,two,three,one,10]
+		
+		ll.add(null);
+		System.out.println(ll);//[one,two,three,one,10,null]
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		LinkedList<String> ll=new LinkedList<String>();
+		ll.add("one");
+		ll.add("two");
+		ll.add("three");
+		System.out.println(ll);//[one,two,three]
+		
+		ll.addFirst("gogo");
+		ll.addLast("jojo");
+		System.out.println(ll);//[gogo,one,two,three,jojo]
+		
+		System.out.println(ll.getFirst());//gogo
+		System.out.println(ll.getLast());//jojo
+		
+		ll.removeFirst();
+		ll.removeLast();
+		System.out.println(ll);//[one,two,three]
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		LinkedList<String> ll1=new LinkedList<String>();
+		ll1.add("one");
+		ll1.add("two");
+		ll1.add("three");
+		System.out.println(ll1);//[one,two,three]
+				
+		LinkedList<String> ll2=new LinkedList<String>();
+		ll2.add("raja");
+		System.out.println(ll2);//[raja]
+		
+		ll2.addAll(ll1);
+		System.out.println(ll2);//[raja,one,two,three]
+		
+		System.out.println(ll2.containsAll(ll1));//true 
+		
+		ll2.removeAll(ll1);
+		System.out.println(ll2);//[raja]
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

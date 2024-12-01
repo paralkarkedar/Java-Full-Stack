@@ -1,0 +1,549 @@
+Q) Write a java program to sort the string?
+
+Input:
+	dog apple cat bat 
+
+Output:
+	apple bat cat dog 
+	
+
+ex:
+import java.util.*;
+class Test  
+{
+	public static void main(String[] args) 
+	{
+		String str="dog apple cat bat";
+		
+		String[] sarr=str.split(" ");	
+		
+		List<String> list=new ArrayList<String>();
+		
+		for(String s:sarr)
+		{
+			list.add(s);
+		}
+		
+		Collections.sort(list);
+		
+		for(String s:list)
+		{
+			System.out.print(s+" ");
+		}
+	}
+}
+
+Q) Write a java program to store employees information in a collection?
+
+import java.util.*;
+
+class Employee
+{
+	//current class variable 
+	private int empId;
+	private String empName;
+	private double empSal;
+	
+	Employee(int empId,String empName,double empSal)
+	{
+		this.empId=empId;
+		this.empName=empName;
+		this.empSal=empSal;
+	}
+	
+	//getter methods 
+	public int getEmpId()
+	{
+		return empId;
+	}
+	public String getEmpName()
+	{
+		return empName;
+	}
+	public double getEmpSal()
+	{
+		return empSal;
+	}
+	
+	public String toString()
+	{
+		return getEmpId()+","+getEmpName()+","+getEmpSal();
+	}
+}
+class Test 
+{
+	public static void main(String[] args)
+	{
+		List<Employee> list=new ArrayList<Employee>();
+		list.add(new Employee(101,"Alan Morries",1000d));
+		list.add(new Employee(102,"Jose Redrequiz",2000d));
+		list.add(new Employee(103,"Ana Julie",3000d));
+		list.add(new Employee(104,"Erick Anderson",4000d));
+		
+		for(Employee e:list)
+		{
+			System.out.println(e);
+		}
+	}
+}
+
+
+Types of cursors in java
+=========================
+Cursors are used to retrieve the objects one by one from Collection.
+
+We have three types of cursors in java.
+
+1) Enumeration 
+
+2) Iterator 
+
+3) ListIterator 
+
+1) Enumeration 
+---------------
+It is used to read objects one by one from legacy Collection objects.
+
+We can create Enumeration object as follow.
+
+ex:
+	Enumeration e=v.elements();
+
+Enumeration interface contains following two methods.
+
+ex:
+	public boolean hasMoreElements()
+	public Object nextElement() 
+
+
+ex:
+---
+import java.util.*;
+class Test 
+{
+	public static void main(String[] args)
+	{
+		Vector v=new Vector();
+		for(int i=1;i<=10;i++)
+		{
+			v.add(i);
+		}
+		
+		Enumeration e=v.elements();
+		while(e.hasMoreElements())
+		{
+			Integer i=(Integer)e.nextElement();
+			System.out.println(i);
+		}
+	}
+}
+
+Limitations with Enumeration:
+
+1) Enumeration is used to read objects one by one only from legacy Collection objects.Hence it is not a 
+   universal cursor.
+
+2) Using Enumeration we can perform read operation but not remove operation.
+
+3) To overcome this limitation Sun Micro System introduced Iterator.
+
+
+Iterator 
+=========
+It is used to read objects one by one from any Collection objects.Hence it is a universal cursor.
+
+Using Iterator we can perform read and remove operations.
+
+We can create Iterator object as follow.
+
+ex:
+	Iterator itr=al.iterator();
+
+Iterator interface contains following three methods.
+ex:
+	public boolean hasNext()	
+	public Object next()
+	public void remove() 
+
+ex:
+---
+import java.util.*;
+class Test 
+{
+	public static void main(String[] args)
+	{
+		ArrayList al=new ArrayList();
+		for(int i=1;i<=10;i++)
+		{
+			al.add(i);
+		}
+		
+		Iterator itr=al.iterator();
+		while(itr.hasNext())
+		{
+			Integer i=(Integer)itr.next();
+			if(i%2==0)
+				System.out.println(i+" ");
+			else
+				itr.remove();
+		}
+		
+		System.out.println(al);
+	}
+}
+
+Limitations with Iterator:
+
+1) Using Enumeration and Iterator we can read objects only in forward direction but not in backward direction.
+   Hence both are not bi-directional cursors.
+
+2) Using Enumeration we can perform read and remove operations but not adding and replacement of new objects.
+
+3) To overcome this limitation we need to use ListIterator.
+
+3) ListIterator 
+--------------
+It is a child interface of Iterator interface.
+
+ListIterator is used to read objects one by one from List Collection objects.
+
+Using ListIterator we can perform read, remove , add and replacement of new objects.
+
+We can create ListIterator object as follow.
+ex:
+	ListIterator litr=al.listIterator();
+
+ListIterator interface contains following 9 methods.
+ex:
+	public boolean hasNext()
+	public Object next()
+	public boolean hasPrevious()
+	public Object previous()
+	public int nextIndex()
+	public int previousIndex()
+	public void remove()
+	public void set(Object o)
+	public void add(Object o)
+
+
+ex:
+---
+import java.util.*;
+class Test 
+{
+	public static void main(String[] args)
+	{
+		ArrayList al=new ArrayList();
+		al.add("bala");
+		al.add("nag");
+		al.add("chiru");
+		al.add("venki");
+		System.out.println(al); //[bala,nag,chiru,venki]
+		
+		ListIterator litr=al.listIterator();
+		while(litr.hasNext())
+		{
+			String s=(String)litr.next();
+			System.out.println(s);
+		}
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test 
+{
+	public static void main(String[] args)
+	{
+		ArrayList al=new ArrayList();
+		al.add("bala");
+		al.add("nag");
+		al.add("chiru");
+		al.add("venki");
+		System.out.println(al); //[bala,nag,chiru,venki]
+		
+		ListIterator litr=al.listIterator();
+		while(litr.hasNext())
+		{
+			String s=(String)litr.next();
+			if(s.equals("chiru"))
+			{
+				litr.remove();
+			}
+		}
+		
+		System.out.println(al);//[bala,nag,venki]
+	}
+}
+
+ex:
+---
+import java.util.*;
+class Test 
+{
+	public static void main(String[] args)
+	{
+		ArrayList al=new ArrayList();
+		al.add("bala");
+		al.add("nag");
+		al.add("chiru");
+		al.add("venki");
+		System.out.println(al); //[bala,nag,chiru,venki]
+		
+		ListIterator litr=al.listIterator();
+		while(litr.hasNext())
+		{
+			String s=(String)litr.next();
+			if(s.equals("chiru"))
+			{
+				litr.add("pavan");
+			}
+		}
+		
+		System.out.println(al);//[bala,nag,chiru,pavan,venki]
+	}
+}
+
+ex:
+--
+import java.util.*;
+class Test 
+{
+	public static void main(String[] args)
+	{
+		ArrayList al=new ArrayList();
+		al.add("bala");
+		al.add("nag");
+		al.add("jagan");
+		al.add("venki");
+		System.out.println(al); //[bala,nag,jagan,venki]
+		
+		ListIterator litr=al.listIterator();
+		while(litr.hasNext())
+		{
+			String s=(String)litr.next();
+			if(s.equals("jagan"))
+			{
+				litr.set("pavan");
+			}
+		}
+		
+		System.out.println(al);//[bala,nag,pavan,venki]
+	}
+}
+
+
+Q) Types of data Structures in java?
+
+Diagram: java43.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

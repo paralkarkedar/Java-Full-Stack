@@ -1,0 +1,492 @@
+To see the output in PL/SQL we need to use below command.
+Ex:
+	SQL> set  serveroutput  on 
+
+
+Steps to work with cursor
+-------------------------
+step1:
+------
+	Declare the cursor
+
+step2:
+-----
+	Open the cursor
+
+step3:
+-----
+	Fetch the data from cursor to local variables
+
+step4:
+-----
+	close the cursor
+
+
+
+Q) Write a PL/SQL program to display employee names from employee table?
+
+	DECLARE 
+	CURSOR C1 is select ename from emp;
+	L_Ename emp.ename%TYPE;
+	BEGIN
+	OPEN C1;
+
+	LOOP
+	FETCH C1 into L_Ename;
+	EXIT WHEN C1%NOTFOUND;
+	DBMS_OUTPUT.PUT_LINE(L_Ename);
+	END LOOP;
+	
+	CLOSE C1;
+	END;
+	/
+
+
+Q) Write a PL/SQL program to display employee name and employee salary from emp table?
+
+	DECLARE 
+	CURSOR C2 is select ename,esal from emp;
+	L_Ename emp.ename%TYPE;
+	L_Esal  emp.esal%TYPE;
+	BEGIN
+	OPEN C2;
+	
+	LOOP 
+	FETCH C2 into L_Ename,L_Esal;
+	EXIT WHEN C2%NOTFOUND;
+	DBMS_OUTPUT.PUT_LINE(L_Ename||'  '||L_Esal);
+	END LOOP;
+
+	END;
+	/
+
+Q) Write a PL/SQL program to select employee information from employee table?
+
+
+	DECLARE 
+	CURSOR C3 is select * from emp;
+	A emp%ROWTYPE;
+	BEGIN
+	OPEN C3;
+
+	LOOP
+	FETCH C3 into A;
+	EXIT WHEN C3%NOTFOUND;
+	DBMS_OUTPUT.PUT_LINE(A.eid||' '||A.ename||' '||A.esal||' '||A.deptno||' '||A.job);
+	END LOOP;
+
+	CLOSE C3;
+	END;
+	/
+
+Procedures
+===========
+It is a named PL/SQL program which is compiled and permanently stored in a database for repeated execution.
+
+syntax:
+	create or replace procedure <procedure_name>
+	is
+	begin
+	-
+	- //code here 
+	-
+	END;
+	/
+
+Q) Write a procedure to display Hello World?
+
+
+	create or replace procedure p1
+	is
+	begin
+	DBMS_OUTPUT.PUT_LINE('Hello World');
+	END;
+	/
+
+To execute the procedure we need to use below command.
+ex:
+	exec  p1;
+
+Every procedure contains three parameters.
+
+1) IN parameter 
+
+2) OUT parameter
+
+3) IN OUT parameter 
+
+
+1) IN parameter
+-----------------
+IN parameter is used to accept the values from the user.
+
+Q) Write a procedure to perform sum of two numbers?
+
+	create or replace procedure sum(A IN number,B IN number)
+	is
+	C number;
+	begin
+	C:=A+B;
+	DBMS_OUTPUT.PUT_LINE(C);
+	END;
+	/
+		
+We can execute the procedure by using below command.
+ex:
+	exec  sum(10,20);
+
+
+Using procedure we can perform DML operations.
+
+	create or replace procedure deleteEmp(L_Eid IN emp.eid%TYPE)
+	is
+	begin
+	delete from emp where eid=L_Eid;
+	DBMS_OUTPUT.PUT_LINE('Record Deleted');
+	END;
+	/
+
+To execute above procedure we need to use below command.
+ex:
+	exec  deleteEmp(207);
+
+
+2) OUT parameter
+-----------------
+It is used to return the value to the user.
+
+Q) Write a procedure to perform sum of two numbers and return sum?
+
+	create or replace procedure ret_sum(A IN number,B IN number,C OUT number)
+	is
+	begin
+	C:=A+B;
+	END;
+	/
+	
+Steps to call a procedure having OUT parameter
+----------------------------------------------
+step1:
+-----
+	Declare a bind variable 
+	ex:
+		variable N number;
+
+step2:
+-----
+	Execute a procedure.
+	ex:
+		exec  ret_sum(10,40,:N);
+
+step3:
+-----
+	Print bind variable 
+	ex:
+		print N;
+
+3) IN OUT parameter 
+---------------------
+It is used to accept and return the value from/to the user.
+
+Q) Write a procedure to perform square of a given number?
+
+	create or replace procedure ret_square(A IN OUT number)
+	is
+	begin
+	A:=A*A;
+	END;
+	/
+
+Steps to call a procedure having IN OUT parameter
+-----------------------------------------------
+step1:
+------
+	Declare a bind variable.
+	ex:
+		variable N number;
+
+step2:
+-----
+	Initialize the bind variable.
+	ex:
+		BEGIN
+		:N := 5;
+		END;
+		/
+
+step3:
+------
+	Execute the procedure.
+	ex:
+		exec  ret_square(:N);
+
+step4:
+------
+	Print bind variable 
+	ex:
+		print N;
+
+
+Q) Write a query to display list of procedures present in database?
+
+	select object_name from user_objects where object_type='PROCEDURE';
+
+
+Q) Write a query to see the source code of a procedure?
+
+	select text from user_source where name='P1';
+
+
+Q) Write a query to drop the procedure?
+
+	drop procedure p1;
+	drop procedure sum;
+	drop procedure ret_sum;
+	drop procedure ret_square;
+
+
+PL/SQL functions
+=================
+It is a named PL/SQL block which must and should returns a value.
+
+syntax:
+	create or replace function <function_name>
+	return datatype	
+	is
+	begin
+	-
+	-
+	-
+	return datatype;
+	END;
+	/
+	
+
+Q) Write a function to perform sum of two numbers and return sum?
+
+	create or replace function f1(A number,B number)
+	return number
+	is
+	C number;
+	begin
+	C:=A+B;
+	return C;
+	END;
+	/
+
+To call the function we need to use below command.
+ex:
+	select  f1(10,20) from dual;
+
+Q) Write a function to accept salary and find out 10% of TDS?
+
+
+	create or replace function tax(salary number)
+	return number
+	is
+	TAX number;
+	begin
+	TAX:=salary*10/100;
+	return TAX;
+	END;
+	/
+
+To execute above function we need to use below command.
+ex:
+	select  tax(10000) from dual;
+	select eid,ename,esal, tax(esal) from emp;
+	select eid,ename,esal, tax(esal) as TDS from emp;
+
+
+Q) Write a query to display list of functions present in database?
+
+	select object_name from user_objects where object_type='FUNCTION';
+
+
+Q) Write a query to see the source code of a function?
+
+	select text from user_source where name='F1';
+
+
+Q) Write a query to drop the function?
+
+	drop function F1;
+	drop function TAX;
+
+	
+Q) What is the difference between procedure and function?
+
+Procedure 					function
+----------					------------
+A procedure may or may not returns a value.	A function always returns a value.
+
+DML operations are allowed.			DML operations are not allowed.
+
+Can't be invoked by using select command.	Can be invoked by using select command.
+
+
+Packages
+========
+A package is a collection of logical related sub programs.
+
+PL/SQL procedures and functions are called logical related sub programs.
+
+Package creation involved in two steps.
+
+1) package specification 
+------------------
+	It contains declaration of logical related sub programs.
+
+2) package body 
+---------------
+	It contains definition of logical related sub programs.
+
+ex:1
+-----
+package specification 
+----------------------
+	create or replace package pkg1 
+	is
+	procedure sum(A IN number,B IN number);
+	END pkg1;
+	/
+
+package body
+------------
+	create or replace package body pkg1 
+	is
+	procedure sum(A IN number,B IN number)
+	is
+	C number;
+	begin	
+	C:=A+B;
+	DBMS_OUTPUT.PUT_LINE(C);
+	END;
+	END pkg1;
+	/
+
+To call procedure we need to use below command.
+ex:
+	exec  pkg1.sum(10,60);
+
+
+ex:2
+-----
+
+package specification 
+------------------
+	create or replace package pkg2
+	is
+	function  f1(A number,B number)
+	return number;
+	end pkg2;
+	/
+
+
+package body
+-----------
+	create or replace package body pkg2
+	is
+	function  f1(A number,B number)
+	return number
+	is
+	C number;
+	begin
+	C:=A+B;
+	return C;
+	END;
+	end pkg2;
+	/
+
+To call the function we need to use below command.
+ex:
+	select pkg2.f1(80,10) from dual;
+
+
+Q) Write a query to display list of packages present in database?
+
+	select object_name from user_objects where object_type='PACKAGE';
+
+
+Q) Write a query to see the source code of a package?
+
+	select text from user_source where name='PKG1';
+
+
+Q) Write a query to drop the package?
+
+	drop package body pkg1;
+	drop package pkg1;
+
+	drop package body pkg2;
+	drop package pkg2;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
